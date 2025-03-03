@@ -68,6 +68,18 @@ body {
     color: #ffbc58 !important;
 }
 
+.ant-form {
+    color: #ffbc58 !important;
+}
+
+.ant-checkbox-wrapper {
+    color: #ffbc58 !important;
+}
+
+.ant-form-item .ant-form-item-label > label {
+    color: #ffbc58 !important;
+}
+
 /* title user management */
 .title {
     font-weight: 500;

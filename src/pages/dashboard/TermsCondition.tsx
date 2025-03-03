@@ -43,9 +43,9 @@ export default function TermsCondition() {
                         padding: '1px',
                         fontSize: '24px',
                         color: 'white',
-                        background: '#00369a',
+                        background: '#181c1d',
                         height: '54px',
-                        border: 'none',
+                        border: '1px solid #ffbc58',
                         borderRadius: 4,
                     }}
                 >

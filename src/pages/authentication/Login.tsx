@@ -30,8 +30,8 @@ const Login = () => {
             }}
         >
             <div className="flex items-center justify-center h-screen">
-                <div className="bg-white w-[630px] rounded-lg shadow-lg p-10 ">
-                    <div className="text-primaryText space-y-3 text-center">
+                <div className=" w-[630px] rounded-lg shadow-lg p-10 ">
+                    <div className="space-y-3 text-center">
                         <h1 className="text-3xl  font-medium text-center mt-2">Login to Account</h1>
                         <p className="text-lg">Please enter your email and password to continue</p>
                     </div>
@@ -45,7 +45,7 @@ const Login = () => {
                     >
                         <Form.Item
                             label={
-                                <label htmlFor="email" className="block text-primaryText mb-1 text-lg">
+                                <label htmlFor="email" className="block  mb-1 text-lg">
                                     Email
                                 </label>
                             }
@@ -57,7 +57,7 @@ const Login = () => {
 
                         <Form.Item
                             label={
-                                <label htmlFor="password" className="block text-primaryText mb-1 text-lg">
+                                <label htmlFor="password" className="block  mb-1 text-lg">
                                     Password
                                 </label>
                             }
@@ -69,7 +69,7 @@ const Login = () => {
 
                         <div className="flex items-center justify-between mb-4">
                             <Form.Item name="remember" valuePropName="checked" noStyle>
-                                <Checkbox className="text-primaryText text-lg">Remember me</Checkbox>
+                                <Checkbox className=" text-lg">Remember me</Checkbox>
                             </Form.Item>
                             <Link to="/forget-password" className="text-primary text-md hover:text-primary">
                                 Forget password

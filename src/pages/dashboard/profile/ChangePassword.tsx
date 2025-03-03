@@ -1,4 +1,4 @@
-import { Button, ConfigProvider, Form, Input, Typography } from 'antd';
+import { Button, ConfigProvider, Form, Input } from 'antd';
 
 export default function ChangePassword() {
     //   const navigate = useNavigate();
@@ -14,7 +14,7 @@ export default function ChangePassword() {
     return (
         <>
             <div className="mx-auto bg-transparent px-5 flex items-center justify-center mt-28 ">
-                <div className="w-full lg:w-2/3 border border-[#0A5239] rounded-xl px-7 pt-16 pb-5 bg-[#F6FFFB]">
+                <div className="w-full lg:w-2/3 border border-[#0A5239] rounded-xl px-7 pt-16 pb-5 ">
                     <ConfigProvider
                         theme={{
                             components: {
@@ -25,9 +25,7 @@ export default function ChangePassword() {
                         }}
                     >
                         <Form form={form} onFinish={onFinish} layout="vertical" className="bg-transparent w-full">
-                            <Typography.Title level={4} style={{ color: 'black' }}>
-                                Current password
-                            </Typography.Title>
+                            <span className=" text-[20px] font-semibold ">Current password</span>
                             <Form.Item
                                 name="currentPassword"
                                 className="text-black"
@@ -36,13 +34,18 @@ export default function ChangePassword() {
                                         required: true,
                                         message: 'Please input your current password!',
                                     },
+                                    {
+                                        min: 6,
+                                        message: 'Please input your current password!',
+                                    },
                                 ]}
                             >
                                 <Input.Password
                                     placeholder="Enter your password"
-                                    className="py-2 px-3 text-xl bg-transparent border-black text-black hover:bg-transparent hover:border-[#E6C379] focus:bg-transparent focus:border-[#E6C379]"
+                                    className="py-2 px-3 text-xl bg-transparent  text-black  border-[#E6C379] focus:bg-transparent focus:border-[#E6C379]"
                                 />
                             </Form.Item>
+                            <span className=" text-[20px] font-semibold ">New Password</span>
                             <Form.Item
                                 name="newPassword"
                                 className="text-black"
@@ -59,12 +62,11 @@ export default function ChangePassword() {
                             >
                                 <Input.Password
                                     placeholder="Enter your password"
-                                    className="py-2 px-3 text-xl bg-transparent border-black text-black hover:bg-transparent hover:border-[#E6C379] focus:bg-transparent focus:border-[#E6C379]"
+                                    className="py-2 px-3 text-xl bg-transparent  text-black  border-[#E6C379] focus:bg-transparent focus:border-[#E6C379]"
                                 />
                             </Form.Item>
-                            <Typography.Title level={4} style={{ color: 'black' }}>
-                                Re-enter new Password
-                            </Typography.Title>
+
+                            <span className=" text-[20px] font-semibold ">Re-enter new Password</span>
                             <Form.Item
                                 name="reEnterPassword"
                                 className="text-black"
@@ -77,7 +79,7 @@ export default function ChangePassword() {
                             >
                                 <Input.Password
                                     placeholder="Enter your password"
-                                    className="py-2 px-3 text-xl bg-transparent border-black text-black hover:bg-transparent hover:border-[#E6C379] focus:bg-transparent focus:border-[#E6C379]"
+                                    className="py-2 px-3 text-xl bg-transparent  text-black  border-[#E6C379] focus:bg-transparent focus:border-[#E6C379]"
                                 />
                             </Form.Item>
                             <Form.Item>
@@ -85,11 +87,11 @@ export default function ChangePassword() {
                                     theme={{
                                         components: {
                                             Button: {
-                                                defaultHoverBg: '',
+                                                defaultBg: '',
 
-                                                defaultHoverBorderColor: '',
+                                                defaultBorderColor: '',
                                                 defaultActiveBorderColor: '',
-                                                defaultHoverColor: '',
+                                                defaultColor: '',
                                                 defaultActiveColor: '',
                                             },
                                         },

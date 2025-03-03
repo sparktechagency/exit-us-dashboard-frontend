@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Form, Input, Button, Avatar, Upload, Typography, UploadFile, ConfigProvider } from 'antd';
+import { Form, Input, Button, Avatar, Upload, UploadFile, ConfigProvider } from 'antd';
 import { MdModeEditOutline, MdOutlineArrowBackIosNew, MdOutlineModeEdit } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
 import { UploadChangeParam } from 'antd/es/upload/interface';
@@ -7,7 +7,7 @@ import { UploadChangeParam } from 'antd/es/upload/interface';
 export default function EditProfile() {
     const navigate = useNavigate();
     const [imageUrl, setImageUrl] = useState<string>('https://i.ibb.co/HpL1HMKZ/image-2.png');
-    const [, setIsEditing] = useState<boolean>(false);
+    // const [, setIsEditing] = useState<boolean>(false);
 
     const [form] = Form.useForm();
 
@@ -15,13 +15,13 @@ export default function EditProfile() {
         navigate('/change-password');
     };
 
-    const handleSave = () => {
-        form.validateFields().then(() => {
-            const formValues = form.getFieldsValue();
-            console.log(formValues);
-            setIsEditing(false);
-        });
-    };
+    // const handleSave = () => {
+    //     form.validateFields().then(() => {
+    //         const formValues = form.getFieldsValue();
+    //         console.log(formValues);
+    //         setIsEditing(false);
+    //     });
+    // };
 
     const handleImageChange = (info: UploadChangeParam<UploadFile<any>>) => {
         if (info.file.status === 'done') {
@@ -63,7 +63,7 @@ export default function EditProfile() {
 
                     <div className="flex justify-end mt-auto ">
                         <Button
-                            className="w-[209px] h-[58px] rounded-2xl font-barlow text-[20px] font-semibold border border-[#C68C4E]"
+                            className="w-[209px] h-[58px] rounded-2xl  text-[20px] font-semibold border border-[#C68C4E]"
                             icon={<MdOutlineModeEdit />}
                             onClick={handleEdit}
                         >
@@ -75,9 +75,7 @@ export default function EditProfile() {
                 <div className="mt-5">
                     <Form form={form} layout="vertical">
                         <div>
-                            <Typography className="font-barlow text-[20px] font-semibold text-[#1E1E1E]">
-                                Full Name
-                            </Typography>
+                            <span className=" text-[20px] font-semibold ">Full Name</span>
                             <div className="mt-3 ">
                                 <Form.Item name="fullname" rules={[{ required: true }]}>
                                     <Input
@@ -89,9 +87,7 @@ export default function EditProfile() {
                         </div>
 
                         <div>
-                            <Typography className="font-barlow text-[20px] font-semibold text-[#1E1E1E]">
-                                Email
-                            </Typography>
+                            <span className=" text-[20px] font-semibold ">Email</span>
                             <div className="mt-3">
                                 <Form.Item name="email" rules={[{ required: true }]}>
                                     <Input
@@ -103,9 +99,7 @@ export default function EditProfile() {
                         </div>
 
                         <div>
-                            <Typography className="font-barlow text-[20px] font-semibold text-[#1E1E1E]">
-                                Contact Number
-                            </Typography>
+                            <span className=" text-[20px] font-semibold ">Contact Number</span>
                             <div className="mt-3">
                                 <Form.Item name="contactNumber" rules={[{ required: true }]}>
                                     <Input

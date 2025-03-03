@@ -134,7 +134,7 @@ export default function UserManagement() {
                     columns={columns}
                     pagination={{ pageSize: 7 }}
                     dataSource={data}
-                    rowClassName="hover:bg-gray-100"
+                    // rowClassName="hover:bg-gray-100"
                 />
             </div>
         </div>

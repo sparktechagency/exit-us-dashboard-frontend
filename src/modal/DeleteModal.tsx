@@ -12,30 +12,22 @@ export default function DeleteModal({ isOpen, onClose }: DeleteModalPros) {
         <Modal isOpen={isOpen}>
             <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-50 z-50">
                 <div className="bg-white rounded-xl shadow-lg p-6 w-[350px]  relative">
-                    {/* Order Image */}
-                    <img
-                        className="w-full rounded-lg mb-6"
-                        src="https://i.ibb.co.com/Nn1R60cB/image-map-usa-filled-stars-600nw-2005076390.webp"
-                        alt="country"
-                    />
+                    <h1 className="text-3xl font-semibold text-red-500 text-nowrap">Are you want to Delete</h1>
 
-                    {/* Order Summary */}
-                    <div className="text-lg font-medium text-gray-800">
-                        <p>
-                            <strong>User Name:</strong> John Doe
-                        </p>
-                        <p>
-                            <strong>Country Name:</strong> USA
-                        </p>
+                    <div className="flex justify-between gap-5">
+                        <button
+                            onClick={onClose}
+                            className="w-full mt-8 py-3 text-lg font-semibold bg-[#181c1d] rounded-lg transition duration-300"
+                        >
+                            No
+                        </button>
+                        <button
+                            onClick={onClose}
+                            className="w-full mt-8 py-3 text-lg font-semibold bg-[#181c1d] rounded-lg transition duration-300"
+                        >
+                            Yes
+                        </button>
                     </div>
-
-                    {/* Done Button */}
-                    <button
-                        onClick={onClose}
-                        className="w-full mt-8 py-3 text-lg font-semibold bg-[#181c1d] rounded-lg transition duration-300"
-                    >
-                        Done
-                    </button>
                 </div>
             </div>
         </Modal>

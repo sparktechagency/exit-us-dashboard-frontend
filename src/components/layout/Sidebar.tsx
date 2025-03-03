@@ -9,6 +9,11 @@ import Booking from '../../../public/sidebar-icon/booking.svg';
 import Total from '../../../public/sidebar-icon/total.svg';
 import Terms from '../../../public/sidebar-icon/temrs.svg';
 import Policy from '../../../public/sidebar-icon/policy.svg';
+import { FaRegUser } from 'react-icons/fa6';
+import { BiSolidDonateHeart } from 'react-icons/bi';
+import { RiUserCommunityLine } from 'react-icons/ri';
+import { AiOutlineContainer, AiTwotoneContainer } from 'react-icons/ai';
+import { MdOutlineVerifiedUser } from 'react-icons/md';
 
 const Sidebar = () => {
     const [selectedKey, setSelectedKey] = useState<string>('/');
@@ -32,18 +37,23 @@ const Sidebar = () => {
         },
         {
             key: '/users',
-            icon: <img src={Booking} height={24} width={24} />,
+            icon: <FaRegUser size={24} />,
             label: <Link to="/users">Users Management</Link>,
         },
         {
             key: '/donate',
-            icon: <img src={Booking} height={24} width={24} />,
+            icon: <BiSolidDonateHeart size={24} />,
             label: <Link to="/donate">Donate</Link>,
+        },
+        {
+            key: '/events',
+            icon: <MdOutlineVerifiedUser size={24} />,
+            label: <Link to="/events">Events</Link>,
         },
 
         {
             key: '/top-communities',
-            icon: <img src={Total} height={24} width={24} />,
+            icon: <RiUserCommunityLine size={24} />,
             label: <Link to="/top-communities">Top Communities</Link>,
         },
 
@@ -58,7 +68,7 @@ const Sidebar = () => {
         },
         {
             key: '/terms-condition',
-            icon: <img src={Terms} height={24} width={24} />,
+            icon: <AiOutlineContainer size={24} />,
             label: (
                 <Link to="/terms-condition" className="text-white hover:text-white">
                     Terms And Condition
@@ -67,7 +77,7 @@ const Sidebar = () => {
         },
         {
             key: '/privacy',
-            icon: <img src={Policy} height={24} width={24} />,
+            icon: <AiTwotoneContainer size={24} />,
             label: (
                 <Link to="/policy" className="text-white hover:text-white">
                     Privacy Policy

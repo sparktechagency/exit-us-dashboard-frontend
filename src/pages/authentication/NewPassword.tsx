@@ -29,9 +29,9 @@ const NewPassword = () => {
                 },
             }}
         >
-            <div className="flex bg-gradient-to-r from-[#EF4136] to-[#FBB040] items-center justify-center h-screen">
-                <div className="bg-white w-[630px] rounded-lg shadow-lg p-10 ">
-                    <div className="text-primaryText max-w-md mx-auto space-y-3 text-center">
+            <div className="flex  items-center justify-center h-screen">
+                <div className=" w-[630px] rounded-lg shadow-lg p-10 ">
+                    <div className=" max-w-md mx-auto space-y-3 text-center">
                         <h1 className="text-3xl  font-medium text-center mt-2">Set a new password</h1>
                         <p>Create a new password. Ensure it differs from previous ones for security</p>
                     </div>
@@ -45,7 +45,7 @@ const NewPassword = () => {
                     >
                         <Form.Item
                             label={
-                                <label htmlFor="password" className="block text-primaryText mb-1 text-lg">
+                                <label htmlFor="password" className="block  mb-1 text-lg">
                                     New Password
                                 </label>
                             }
@@ -56,7 +56,7 @@ const NewPassword = () => {
                         </Form.Item>
                         <Form.Item
                             label={
-                                <label htmlFor="password" className="block text-primaryText mb-1 text-lg">
+                                <label htmlFor="password" className="block  mb-1 text-lg">
                                     Confirm Password
                                 </label>
                             }

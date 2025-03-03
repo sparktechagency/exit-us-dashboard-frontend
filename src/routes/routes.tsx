@@ -19,6 +19,7 @@ import EditProfile from '../pages/dashboard/profile/EditProfile';
 import ChangePassword from '../pages/dashboard/profile/ChangePassword';
 import Donate from '../pages/dashboard/donate/Donate';
 import TopCommunities from '../pages/dashboard/topCommunities/TopCommunities';
+import Events from '../pages/dashboard/events/Events';
 
 const router = createBrowserRouter([
     {
@@ -30,6 +31,7 @@ const router = createBrowserRouter([
             { path: 'users', element: <UserManagement /> },
             { path: 'users', element: <Users /> },
             { path: 'donate', element: <Donate /> },
+            { path: 'events', element: <Events /> },
             { path: 'totalEaring', element: <TotalEaring /> },
             { path: 'top-communities', element: <TopCommunities /> },
             { path: 'terms-condition', element: <TermsCondition /> },

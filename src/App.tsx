@@ -16,6 +16,7 @@ function App() {
                             headerColor: '#ffbc58',
                             colorBgContainer: '#181c1d ',
                             colorText: '#ffbc58',
+                            headerSplitColor: '',
                         },
                     },
                 }}

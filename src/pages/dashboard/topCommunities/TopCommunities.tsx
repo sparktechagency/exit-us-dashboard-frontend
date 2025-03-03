@@ -3,20 +3,20 @@
 import { ConfigProvider, Spin, Table } from 'antd';
 
 import { useState } from 'react';
-import DeleteModal from '../../../modal/DeleteModal';
 import useData from '../../../hooks/useData';
 import { IoEyeOutline } from 'react-icons/io5';
+import DetailsModal from '../../../modal/DetailsModal';
 
 export default function TopCommunities() {
     const { data, loading } = useData('/data/topCommunities.json');
-    const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
+    const [detailsModalOpen, setDetailsModalOpen] = useState<boolean>(false);
 
     const tableTheme = {
         components: {
             Table: {
                 borderColor: '#E7E7E7',
-                headerColor: '#FF991C',
-                fontWeightStrong: 600,
+
+                fontWeightStrong: 700,
                 scrollX,
             },
         },
@@ -73,8 +73,8 @@ export default function TopCommunities() {
                                 dataIndex="action"
                                 key="action"
                                 render={() => (
-                                    <div className="">
-                                        <span onClick={() => setIsDeleteModalOpen(true)}>
+                                    <div className="ml-3">
+                                        <span onClick={() => setDetailsModalOpen(true)}>
                                             <IoEyeOutline size={24} className="" />
                                         </span>
                                     </div>
@@ -86,9 +86,7 @@ export default function TopCommunities() {
             </div>
 
             {/* delete modal */}
-            {isDeleteModalOpen && (
-                <DeleteModal isOpen={isDeleteModalOpen} onClose={() => setIsDeleteModalOpen(false)} />
-            )}
+            {detailsModalOpen && <DetailsModal isOpen={detailsModalOpen} onClose={() => setDetailsModalOpen(false)} />}
         </>
     );
 }
