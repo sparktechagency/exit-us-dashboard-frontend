@@ -70,7 +70,7 @@ export default function Events() {
                                     <div className="w-full lg:w-[80%]">
                                         <div className="flex lg:flex-row flex-col items-center justify-center gap-2 lg:gap-5 py-2 rounded-md   px-2 lg:px-0">
                                             <span
-                                                className={`text-nowrap font-semibold  py-1 px-2 rounded-md border border-black`}
+                                                className={`text-nowrap font-semibold  py-1 px-2 rounded-md border border-stoke`}
                                                 onClick={() => setIsDeleteModalOpen(true)}
                                             >
                                                 <RiDeleteBin5Line size={24} className="text-[#FE3838]" />

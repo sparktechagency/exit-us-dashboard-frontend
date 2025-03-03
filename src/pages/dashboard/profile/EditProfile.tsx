@@ -62,13 +62,13 @@ export default function EditProfile() {
                     </div>
 
                     <div className="flex justify-end mt-auto ">
-                        <Button
-                            className="w-[209px] h-[58px] rounded-2xl  text-[20px] font-semibold border border-[#C68C4E]"
-                            icon={<MdOutlineModeEdit />}
+                        <span
+                            className="w-[209px] h-[58px] rounded-2xl text-[20px]  border border-[#C68C4E] flex items-center justify-center space-x-2 cursor-pointer"
                             onClick={handleEdit}
                         >
+                            <MdOutlineModeEdit className="text-xl mr-2" /> {/* This adds the icon */}
                             Change Password
-                        </Button>
+                        </span>
                     </div>
                 </div>
 
@@ -126,11 +126,11 @@ export default function EditProfile() {
                                 }}
                             >
                                 <Button
-                                    className="w-full py-6 rounded-sm border !bg-[#C68C4E] text-xl text-white font-semibold mt-5"
+                                    className="w-full py-6 rounded-sm border !bg-[#C68C4E] text-xl text-white font-semibold mt-5 !border-none"
                                     htmlType="submit"
                                     style={{ background: '#004AAD' }}
                                 >
-                                    Change password
+                                    Update Profile
                                 </Button>
                             </ConfigProvider>
                         </div>

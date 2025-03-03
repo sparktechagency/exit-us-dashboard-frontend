@@ -26,11 +26,14 @@ const ForgetPassword = () => {
                         controlOutline: 'none',
                         activeBorderColor: 'transparent',
                     },
+                    Button: {
+                        colorPrimaryHover: 'rgb(0,0,0)',
+                    },
                 },
             }}
         >
             <div className="flex  items-center justify-center h-screen">
-                <div className=" w-[630px] rounded-lg shadow-lg p-10 ">
+                <div className=" w-[660px] rounded-lg  p-10 border border-[#FFBC58]">
                     <div className=" space-y-3 text-center">
                         <h1 className="text-3xl  font-medium text-center mt-2">Forget Password</h1>
                     </div>
@@ -56,8 +59,8 @@ const ForgetPassword = () => {
 
                         <Form.Item>
                             <Button
+                                className="!bg-[#fbb040] !border-none !hover-none"
                                 shape="round"
-                                type="primary"
                                 htmlType="submit"
                                 style={{
                                     height: 45,

@@ -10,7 +10,6 @@ import ForgetPassword from '../pages/authentication/ForgetPassword';
 import VerifyOtp from '../pages/authentication/VerifyOtp';
 import NewPassword from '../pages/authentication/NewPassword';
 
-import Users from '../pages/dashboard/Users';
 import TotalEaring from '../pages/dashboard/TotalEaring/TotalEaring';
 import Dashboard from '../pages/dashboard/dasboard/Dashboard';
 import UserManagement from '../pages/dashboard/userManagement/UserManagement';
@@ -29,7 +28,6 @@ const router = createBrowserRouter([
         children: [
             { path: '', element: <Dashboard /> },
             { path: 'users', element: <UserManagement /> },
-            { path: 'users', element: <Users /> },
             { path: 'donate', element: <Donate /> },
             { path: 'events', element: <Events /> },
             { path: 'totalEaring', element: <TotalEaring /> },

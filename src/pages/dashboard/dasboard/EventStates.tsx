@@ -39,10 +39,10 @@ const EventStates = () => {
         <div>
             <div className="grid lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5 gap-5">
                 {data.map((item, index) => (
-                    <div key={index} className="bg-[#181c1d] rounded-md p-4  w-full shadow-sm border border-[#F0F0F0]">
+                    <div key={index} className="bg-[#181c1d] rounded-md p-4  w-full shadow-sm border border-[#ffbc58]">
                         <div className="flex items-center gap-3 ">
                             <div
-                                className={`bg-[#FDF6EC] w-[54px] h-[54px] rounded-full flex items-center justify-center`}
+                                className={`bg-[#dac7ad] w-[54px] h-[54px] rounded-full flex items-center justify-center`}
                             >
                                 {item?.icon}
                             </div>
@@ -53,10 +53,8 @@ const EventStates = () => {
                             </div>
                         </div>
                         <div className="flex gap-2 items-center justify-end pt-1">
-                            <div
-                                className={`bg-[#e0f9f2] w-[18px] h-[18px] rounded-full flex items-center justify-center`}
-                            >
-                                <FaArrowUp color="#00A389" size={8} />
+                            <div className={`bg-[#e6b47b] w-5 h-5 rounded-full flex items-center justify-center`}>
+                                <FaArrowUp size={12} className="font-bold text-black" />
                             </div>
                         </div>
                     </div>

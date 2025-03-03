@@ -18,6 +18,9 @@ function App() {
                             colorText: '#ffbc58',
                             headerSplitColor: '',
                         },
+                        Select: {
+                            colorBgContainer: '#FFBC58',
+                        },
                     },
                 }}
             >

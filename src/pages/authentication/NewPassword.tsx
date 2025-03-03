@@ -26,11 +26,15 @@ const NewPassword = () => {
                         controlOutline: 'none',
                         activeBorderColor: 'transparent',
                     },
+
+                    Button: {
+                        colorPrimaryHover: 'rgb(0,0,0)',
+                    },
                 },
             }}
         >
             <div className="flex  items-center justify-center h-screen">
-                <div className=" w-[630px] rounded-lg shadow-lg p-10 ">
+                <div className=" w-[660px] rounded-lg  p-10 border border-[#FFBC58]">
                     <div className=" max-w-md mx-auto space-y-3 text-center">
                         <h1 className="text-3xl  font-medium text-center mt-2">Set a new password</h1>
                         <p>Create a new password. Ensure it differs from previous ones for security</p>
@@ -69,7 +73,7 @@ const NewPassword = () => {
                         <Form.Item>
                             <Button
                                 shape="round"
-                                type="primary"
+                                className="!bg-[#fbb040] !border-none !hover-none"
                                 htmlType="submit"
                                 style={{
                                     height: 45,

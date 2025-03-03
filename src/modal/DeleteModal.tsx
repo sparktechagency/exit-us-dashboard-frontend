@@ -17,13 +17,13 @@ export default function DeleteModal({ isOpen, onClose }: DeleteModalPros) {
                     <div className="flex justify-between gap-5">
                         <button
                             onClick={onClose}
-                            className="w-full mt-8 py-3 text-lg font-semibold bg-[#181c1d] rounded-lg transition duration-300"
+                            className="w-full mt-8 py-2 text-lg font-semibold text-black border border-black rounded-lg transition duration-300"
                         >
                             No
                         </button>
                         <button
                             onClick={onClose}
-                            className="w-full mt-8 py-3 text-lg font-semibold bg-[#181c1d] rounded-lg transition duration-300"
+                            className="w-full mt-8 text-lg font-semibold bg-[#181c1d] rounded-lg transition duration-300"
                         >
                             Yes
                         </button>

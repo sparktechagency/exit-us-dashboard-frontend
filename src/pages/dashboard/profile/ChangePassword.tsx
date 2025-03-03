@@ -98,7 +98,7 @@ export default function ChangePassword() {
                                     }}
                                 >
                                     <Button
-                                        className="w-full py-6 rounded-sm border !bg-[#C68C4E] text-xl text-white font-semibold mt-5"
+                                        className="w-full py-6 rounded-sm border !bg-[#C68C4E] text-xl text-white font-semibold mt-5 !border-none"
                                         htmlType="submit"
                                         style={{ background: '#004AAD' }}
                                     >

@@ -26,11 +26,14 @@ const Login = () => {
                         controlOutline: 'none',
                         activeBorderColor: 'transparent',
                     },
+                    Button: {
+                        colorPrimaryHover: 'rgb(0,0,0)',
+                    },
                 },
             }}
         >
-            <div className="flex items-center justify-center h-screen">
-                <div className=" w-[630px] rounded-lg shadow-lg p-10 ">
+            <div className="flex items-center justify-center h-screen ">
+                <div className=" w-[650px] rounded-lg  border border-[#FFBC58] p-14 ">
                     <div className="space-y-3 text-center">
                         <h1 className="text-3xl  font-medium text-center mt-2">Login to Account</h1>
                         <p className="text-lg">Please enter your email and password to continue</p>
@@ -78,8 +81,8 @@ const Login = () => {
 
                         <Form.Item>
                             <Button
+                                className="!bg-[#fbb040] !border-none !hover-none"
                                 shape="round"
-                                type="primary"
                                 htmlType="submit"
                                 style={{
                                     height: 45,

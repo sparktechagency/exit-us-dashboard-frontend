@@ -113,17 +113,20 @@ export default function UserManagement() {
             title: <span className="title">phone</span>,
             dataIndex: 'phone',
             key: 'phone',
+            render: (phone: string) => <div className="">{phone}</div>,
         },
 
         {
-            title: <span className="title">Status</span>,
+            title: <span className="title flex justify-center mr-4">Status</span>,
             dataIndex: 'status',
             key: 'status',
             render: (status: string) => (
-                <Select defaultValue={status} className="w-24">
-                    <Select.Option value="Block">Block</Select.Option>
-                    <Select.Option value="Unblock">Unblock</Select.Option>
-                </Select>
+                <div className="flex justify-center items-center">
+                    <Select defaultValue={status} className="w-24">
+                        <Select.Option value="Block">Block</Select.Option>
+                        <Select.Option value="Unblock">Unblock</Select.Option>
+                    </Select>
+                </div>
             ),
         },
     ];

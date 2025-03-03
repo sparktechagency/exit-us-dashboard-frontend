@@ -26,7 +26,7 @@ const VerifyOtp = () => {
             }}
         >
             <div className="flex  items-center justify-center h-screen">
-                <div className=" w-[630px] rounded-lg shadow-lg p-10 ">
+                <div className=" w-[660px] rounded-lg p-10 border border-[#FFBC58]">
                     <div className=" space-y-3 text-center">
                         <h1 className="text-3xl  font-medium text-center mt-2">Check your email</h1>
                         <p>
