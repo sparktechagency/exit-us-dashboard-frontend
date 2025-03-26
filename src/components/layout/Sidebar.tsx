@@ -110,7 +110,8 @@ const Sidebar = () => {
                     components: {
                         Menu: {
                             itemBorderRadius: '0px' as any,
-                            itemHeight: 60,
+                            itemHeight: 50,
+                            fontFamily: 'Outfit',
                         },
                     },
                 }}

@@ -27,7 +27,7 @@ export default function Chart() {
             className="p-4"
         >
             <div className=" flex items-center justify-between">
-                <h1 className="text-2xl font-medium">User Statistics</h1>
+                <h1 className="text-2xl font-medium">Users Statics</h1>
                 <Select defaultValue="2024" className="w-32 h-[40px]">
                     <Option value="2024">2024</Option>
                     <Option value="2025">2025</Option>
