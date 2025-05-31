@@ -1,76 +1,50 @@
-import { Layout } from 'antd';
-import { IoMdNotificationsOutline } from 'react-icons/io';
-import { Link } from 'react-router-dom';
+import { MdOutlineNotifications } from 'react-icons/md';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
-const { Header } = Layout;
+const pathLink = [
+    { label: 'Dashboard', path: '/' },
+    { label: 'User Management', path: '/user-management' },
+    { label: 'Donate', path: '/donate' },
+    { label: 'Events', path: '/events' },
+    { label: 'Top Communities', path: '/top-communities' },
+    { label: 'Change Password', path: '/change-password' },
+    { label: 'Privacy Policy', path: '/privacy-policy' },
+    { label: 'Terms Condition', path: '/terms-condition' },
+    { label: 'Profile', path: '/profile' },
+    { label: 'Edit Profile', path: '/edit-profile' },
+];
 
-const HeaderDashboard = () => {
+export default function Header() {
+    const navigate = useNavigate();
+    const location = useLocation();
+    const currentPath = location.pathname;
+    const currentPathName = pathLink.find((item) => item.path === currentPath);
     return (
-        <Header
-            className=" mb-10"
-            style={{
-                height: 80,
+        <div className="flex justify-between py-9 px-5">
+            <div className="flex items-center gap-2 px-4">
+                <div className="text-xl">{currentPathName ? currentPathName.label : ''}</div>
+            </div>
 
-                width: '100%',
-                overflow: 'hidden',
-            }}
-        >
-            <div className="flex items-center justify-end gap-5 h-full">
-                <div>
-                    {/*notification icons */}
-                    <Link to={'/notification'}>
-                        <div className="size-10 rounded-full flex items-center justify-center ">
-                            <button className="py-4 px-1 relative border-2 border-transparent rounded-full hover:text-gray-400 focus:outline-none focus:text-gray-500 transition duration-150 ease-in-out">
-                                <span className="absolute inset-0 -top-4  -mr-6">
-                                    <div className="inline-flex items-center px-1.5 py-0.5 border-2 border-white rounded-full text-xs font-semibold leading-4 bg-primary text-white">
-                                        6
-                                    </div>
-                                </span>
-
-                                <IoMdNotificationsOutline size={24} />
-                            </button>
-                        </div>
-                    </Link>
-                </div>
-                <div>
-                    {/* profile */}
-
-                    <Link
-                        to={'/edit-profile'}
-                        style={{
-                            height: '42px',
-                            cursor: 'pointer',
-                            borderRadius: '5px',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '10px',
-                            margin: '10px',
-                        }}
-                    >
-                        <img
-                            src={'/user.svg'}
-                            style={{
-                                width: '44px',
-                                height: '44px',
-                                borderRadius: '50%',
-                                borderColor: '#00369A',
-                                borderWidth: 2,
-                            }}
-                            alt=""
-                        />
-                        <h2
-                            style={{
-                                fontSize: '16px',
-                                fontWeight: '600',
-                            }}
-                        >
-                            John Doe
-                        </h2>
-                    </Link>
+            <div className="flex items-center justify-center  gap-5 px-4">
+                <Link to="/notification">
+                    <div className=" flex items-center justify-center rounded-full text-black relative">
+                        <span className="absolute inset-0  ml-6 -mt-2 -left-2">
+                            <div className="inline-flex items-center px-1.5 py-0.5  text-xs font-semibold leading-4 rounded-full bg-[#EEC10B]  text-black">
+                                6
+                            </div>
+                        </span>
+                        <MdOutlineNotifications className="text-yellow-50" size={28} />
+                    </div>
+                </Link>
+                <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/profile')}>
+                    <img
+                        className="rounded-full w-10 h-10 border-2 border-[#8AC2FF]"
+                        src="https://i.ibb.co/xJdQCTG/download.jpg"
+                        alt="pic"
+                    />
+                    <div>Mostain Billah</div>
                 </div>
             </div>
-        </Header>
+        </div>
     );
-};
-
-export default HeaderDashboard;
+}

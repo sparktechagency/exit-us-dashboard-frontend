@@ -1,31 +1,17 @@
-import { MdOutlineArrowBackIosNew } from 'react-icons/md';
 import { Button } from 'antd';
 import { useRef, useState } from 'react';
 import JoditEditor from 'jodit-react';
-import { useNavigate } from 'react-router-dom';
 
 export default function PrivacyPolicy() {
     const editor = useRef(null);
-    const navigate = useNavigate();
-
     const [content, setContent] = useState('');
 
-    const handleOnSave = (value: string) => {
-        console.log(value);
+    const handleOnSave = () => {
+        console.log('value');
     };
     return (
         <div>
-            <div className="flex items-center gap-4 font-semibold text-[20px]" onClick={() => navigate(-1)}>
-                <button className="text-xl">
-                    <MdOutlineArrowBackIosNew />
-                </button>
-                <button>Privacy Policy</button>
-            </div>
-
             <div className="">
-                {/* <div className="flex items-center justify-center mt-28">
-          <img src={terms} />
-        </div> */}
                 <div className="mt-5">
                     <JoditEditor
                         ref={editor}
@@ -36,7 +22,7 @@ export default function PrivacyPolicy() {
                 </div>
                 <Button
                     block
-                    onClick={() => handleOnSave(content)}
+                    onClick={handleOnSave}
                     className=""
                     style={{
                         marginTop: '16px',

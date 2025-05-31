@@ -15,7 +15,7 @@ const MainLayout: React.FC = () => {
 
             {/* main container with header */}
             <div className="col-span-10">
-                <div className="flex items-center justify-end pr-5">
+                <div className="mb-8">
                     <HeaderDashboard />
                 </div>
 

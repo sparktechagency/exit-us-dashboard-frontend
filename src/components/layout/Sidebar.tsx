@@ -33,9 +33,9 @@ const Sidebar = () => {
             ),
         },
         {
-            key: '/users',
+            key: '/user-management',
             icon: <FaRegUser size={24} />,
-            label: <Link to="/users">Users Management</Link>,
+            label: <Link to="/user-management">Users Management</Link>,
         },
         {
             key: '/donate',
@@ -55,10 +55,10 @@ const Sidebar = () => {
         },
 
         {
-            key: 'edit-profile',
+            key: 'profile',
             icon: <IoSettingsOutline size={24} />,
             label: (
-                <Link to="/edit-profile" className="text-white hover:text-white">
+                <Link to="/profile" className="text-white hover:text-white">
                     Settings
                 </Link>
             ),
@@ -73,10 +73,10 @@ const Sidebar = () => {
             ),
         },
         {
-            key: '/privacy',
+            key: '/privacy-policy',
             icon: <AiTwotoneContainer size={24} />,
             label: (
-                <Link to="/policy" className="text-white hover:text-white">
+                <Link to="/privacy-policy" className="text-white hover:text-white">
                     Privacy Policy
                 </Link>
             ),

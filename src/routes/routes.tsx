@@ -19,6 +19,7 @@ import ChangePassword from '../pages/dashboard/profile/ChangePassword';
 import Donate from '../pages/dashboard/donate/Donate';
 import TopCommunities from '../pages/dashboard/topCommunities/TopCommunities';
 import Events from '../pages/dashboard/events/Events';
+import Profile from '../pages/dashboard/profile/Profile';
 
 const router = createBrowserRouter([
     {
@@ -27,15 +28,16 @@ const router = createBrowserRouter([
         errorElement: <ErrorPage />,
         children: [
             { path: '', element: <Dashboard /> },
-            { path: 'users', element: <UserManagement /> },
+            { path: 'user-management', element: <UserManagement /> },
             { path: 'donate', element: <Donate /> },
             { path: 'events', element: <Events /> },
             { path: 'totalEaring', element: <TotalEaring /> },
             { path: 'top-communities', element: <TopCommunities /> },
             { path: 'terms-condition', element: <TermsCondition /> },
-            { path: 'policy', element: <PrivacyPolicy /> },
+            { path: 'privacy-policy', element: <PrivacyPolicy /> },
 
             { path: 'notification', element: <Notification /> },
+            { path: 'profile', element: <Profile /> },
             { path: 'edit-profile', element: <EditProfile /> },
             { path: 'change-password', element: <ChangePassword /> },
         ],

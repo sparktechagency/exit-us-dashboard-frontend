@@ -1,74 +1,48 @@
 import { useState } from 'react';
-import { Form, Input, Button, Avatar, Upload, UploadFile, ConfigProvider } from 'antd';
-import { MdModeEditOutline, MdOutlineArrowBackIosNew, MdOutlineModeEdit } from 'react-icons/md';
-import { useNavigate } from 'react-router-dom';
-import { UploadChangeParam } from 'antd/es/upload/interface';
+import { Form, Input, Button, ConfigProvider } from 'antd';
+import { MdModeEditOutline } from 'react-icons/md';
 
 export default function EditProfile() {
-    const navigate = useNavigate();
-    const [imageUrl, setImageUrl] = useState<string>('https://i.ibb.co/HpL1HMKZ/image-2.png');
-    // const [, setIsEditing] = useState<boolean>(false);
+    // const navigate = useNavigate();
+
+    const [imageUrl, setImageUrl] = useState<string>('');
+    const [preview, setPreview] = useState<File | null>(null);
 
     const [form] = Form.useForm();
 
-    const handleEdit = () => {
-        navigate('/change-password');
-    };
+    const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const file = e.target?.files?.[0];
 
-    // const handleSave = () => {
-    //     form.validateFields().then(() => {
-    //         const formValues = form.getFieldsValue();
-    //         console.log(formValues);
-    //         setIsEditing(false);
-    //     });
-    // };
-
-    const handleImageChange = (info: UploadChangeParam<UploadFile<any>>) => {
-        if (info.file.status === 'done') {
-            setImageUrl(info.file.response?.url || '');
-        } else if (info.file.status === 'uploading') {
-            const reader = new FileReader();
-            reader.onloadend = () => {
-                setImageUrl(reader.result as string); // Make sure to cast the result to string
-            };
-            reader.readAsDataURL(info.file.originFileObj!); // Using "!" to assert the object is not null
+        if (file) {
+            const url = URL.createObjectURL(file);
+            setImageUrl(url);
+            setPreview(file);
         }
     };
 
     return (
         <div className="">
-            {/* profile */}
-
             <div className="w-[1035px] mx-auto">
-                <div className="flex items-center gap-4 font-semibold text-[20px]" onClick={() => navigate(-1)}>
-                    <button className="text-xl">
-                        <MdOutlineArrowBackIosNew />
-                    </button>
-                    <button>Profile</button>
-                </div>
                 <div className="flex justify-between space-x-6 mt-12">
                     <div className="flex items-center gap-4">
-                        <div className="relative">
-                            <Avatar size={100} src={imageUrl} className="border border-[#C68C4E]" />
+                        <div className="relative inline-block w-24 h-24">
+                            <img
+                                src={imageUrl}
+                                alt="Profile"
+                                className="w-24 h-24 rounded-full border-2 border-[#C68C4E] object-cover"
+                            />
+                            <label
+                                className="absolute bottom-2 -right-1 bg-[#C68C4E] rounded-full p-1 shadow-lg hover:bg-[#b77f3f] transition cursor-pointer"
+                                aria-label="Edit profile"
+                            >
+                                <MdModeEditOutline className="text-white w-5 h-5" />
+                                <input type="file" accept="image/*" onChange={handleImageChange} className="hidden" />
+                            </label>
                         </div>
-                        <Upload showUploadList={false} onChange={handleImageChange} accept="image/*">
-                            <div className="absolute left-[685px] mt-4 bg-[#FF991C] w-[22px] h-[22px] flex justify-center items-center rounded-full cursor-pointer">
-                                <MdModeEditOutline className="text-white" />
-                            </div>
-                        </Upload>
+
                         <div>
                             <h3 className="font-medium font-montserrat text-2xl">Ethan Michael</h3>
                         </div>
-                    </div>
-
-                    <div className="flex justify-end mt-auto ">
-                        <span
-                            className="w-[209px] h-[58px] rounded-2xl text-[20px]  border border-[#C68C4E] flex items-center justify-center space-x-2 cursor-pointer"
-                            onClick={handleEdit}
-                        >
-                            <MdOutlineModeEdit className="text-xl mr-2" /> {/* This adds the icon */}
-                            Change Password
-                        </span>
                     </div>
                 </div>
 
