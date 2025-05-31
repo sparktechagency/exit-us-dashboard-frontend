@@ -1,3 +1,11 @@
-import { createApi } from '@reduxjs/toolkit/query/react';
+import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const baseApi = createApi({});
+const api = createApi({
+    reducerPath: 'api',
+    baseQuery: fetchBaseQuery({ baseUrl: 'https://pokeapi.co/api/v2/' }),
+    endpoints: () => ({}),
+});
+
+export const imageUrl = 'https://pokeapi.co/api/v2/';
+
+export default api;
