@@ -17,6 +17,7 @@ function App() {
                             colorBgContainer: '#181c1d ',
                             colorText: '#ffbc58',
                             headerSplitColor: '',
+                            cellPaddingBlock: 6,
                         },
                         Select: {
                             colorBgContainer: '#FFBC58',

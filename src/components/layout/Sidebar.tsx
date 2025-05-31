@@ -1,6 +1,6 @@
 import { ConfigProvider, Menu } from 'antd';
-import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { IoIosLogOut } from 'react-icons/io';
 import { IoSettingsOutline } from 'react-icons/io5';
 import logo from '../../assets/logo.svg';
@@ -13,9 +13,15 @@ import { AiOutlineContainer, AiTwotoneContainer } from 'react-icons/ai';
 import { MdOutlineVerifiedUser } from 'react-icons/md';
 
 const Sidebar = () => {
-    const [selectedKey, setSelectedKey] = useState<string>('/');
     const [openKeys, setOpenKeys] = useState<string[]>([]);
     const navigate = useNavigate();
+
+    const location = useLocation();
+    const [selectedKey, setSelectedKey] = useState<string>(location.pathname);
+
+    useEffect(() => {
+        setSelectedKey(location.pathname);
+    }, [location.pathname]);
 
     const handleLogout = () => {
         localStorage.removeItem('token');
