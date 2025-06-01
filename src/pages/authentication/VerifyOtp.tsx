@@ -1,12 +1,32 @@
-import { Button, ConfigProvider, Form, FormProps, Input } from 'antd';
-import { FieldNamesType } from 'antd/es/cascader';
+import { Button, ConfigProvider, Form, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
+import { useVeryfyOtpMutation } from '../../redux/apiSlice/auth/auth';
+import toast from 'react-hot-toast';
 
 const VerifyOtp = () => {
+    const [veryfyOtp] = useVeryfyOtpMutation();
     const navigate = useNavigate();
-    const onFinish: FormProps<FieldNamesType>['onFinish'] = (values) => {
-        console.log('Received values of form: ', values);
-        navigate('/new-password');
+    const email = localStorage.getItem('email');
+    const adminEmail = email ? JSON.parse(email) : '';
+
+    const onFinish = async (values: { oneTimeCode: string }) => {
+        const data = {
+            email: adminEmail,
+            oneTimeCode: parseInt(values.oneTimeCode),
+        };
+        console.log(data);
+        try {
+            const res = await veryfyOtp(data);
+            if (res?.data?.success) {
+                toast.success(res.data.message, {
+                    duration: 1000,
+                });
+                navigate(`/new-password?token=${res.data.data}`);
+            }
+        } catch (error: any) {
+            const errorMessage = error?.data?.message || error?.error || 'Something went wrong';
+            toast.error(errorMessage);
+        }
     };
 
     return (
@@ -14,9 +34,7 @@ const VerifyOtp = () => {
             theme={{
                 components: {
                     Input: {
-                        // lineHeight: 3,
                         controlHeight: 50,
-
                         borderRadius: 10,
                     },
                 },
@@ -28,9 +46,9 @@ const VerifyOtp = () => {
             <div className="flex  items-center justify-center h-screen">
                 <div className=" w-[660px] rounded-lg p-10 border border-[#FFBC58]">
                     <div className=" space-y-3 text-center">
-                        <h1 className="text-3xl  font-medium text-center mt-2">Check your email</h1>
+                        <h1 className="text-3xl  font-medium text-center mt-2">Verify OTP</h1>
                         <p>
-                            We sent a reset link to contact@dscode...com enter 5 digit code that mentioned in the email
+                            We sent a reset link to contact@dscode...com enter 4 digit code that mentioned in the email
                         </p>
                     </div>
 
@@ -43,7 +61,7 @@ const VerifyOtp = () => {
                     >
                         <Form.Item
                             className="flex items-center justify-center mx-auto "
-                            name="otp"
+                            name="oneTimeCode"
                             rules={[{ required: true, message: 'Please input otp code here!' }]}
                         >
                             <Input.OTP
@@ -52,7 +70,7 @@ const VerifyOtp = () => {
                                 }}
                                 className=""
                                 // variant="filled"
-                                length={6}
+                                length={4}
                             />
                         </Form.Item>
 

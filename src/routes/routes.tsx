@@ -17,7 +17,7 @@ import PrivacyPolicy from '../pages/dashboard/PrivacyPolicy';
 import EditProfile from '../pages/dashboard/profile/EditProfile';
 import ChangePassword from '../pages/dashboard/profile/ChangePassword';
 import Donate from '../pages/dashboard/donate/Donate';
-import TopCommunities from '../pages/dashboard/topCommunities/TopCommunities';
+import TopCommunities from '../pages/dashboard/allMeetups/AllMeetups';
 import Events from '../pages/dashboard/events/Events';
 import Profile from '../pages/dashboard/profile/Profile';
 

@@ -1,12 +1,28 @@
-import { Button, ConfigProvider, Form, FormProps, Input } from 'antd';
-import { FieldNamesType } from 'antd/es/cascader';
+import { Button, ConfigProvider, Form, Input } from 'antd';
 import { useNavigate } from 'react-router';
+import { useResetPasswordMutation } from '../../redux/apiSlice/auth/auth';
+import toast from 'react-hot-toast';
 
 const NewPassword = () => {
+    const [resetPassword] = useResetPasswordMutation();
     const navigate = useNavigate();
-    const onFinish: FormProps<FieldNamesType>['onFinish'] = (values) => {
-        console.log('Received values of form: ', values);
-        navigate('/');
+    const searchParams = new URLSearchParams(window.location.search);
+    const token = searchParams.get('token');
+
+    const onFinish = async (values: { newPassword: string; confirmPassword: string }) => {
+        console.log(values);
+        if (values.newPassword !== values.confirmPassword) {
+            toast.error('Passwords do not match');
+            return;
+        }
+
+        try {
+            await resetPassword({ token, data: values }).unwrap();
+            toast.success('reset password successfully');
+            navigate('/login');
+        } catch (error: unknown) {
+            toast.error((error as any)?.data?.message || (error as Error)?.message || 'Failed to reset password');
+        }
     };
 
     return (
@@ -49,22 +65,22 @@ const NewPassword = () => {
                     >
                         <Form.Item
                             label={
-                                <label htmlFor="password" className="block  mb-1 text-lg">
+                                <label htmlFor="newPassword" className="block  mb-1 text-lg">
                                     New Password
                                 </label>
                             }
-                            name="new_password"
+                            name="newPassword"
                             rules={[{ required: true, message: 'Please input new password!' }]}
                         >
                             <Input.Password placeholder="KK!@#$15856" className=" h-12 px-6" />
                         </Form.Item>
                         <Form.Item
                             label={
-                                <label htmlFor="password" className="block  mb-1 text-lg">
+                                <label htmlFor="confirmPassword" className="block  mb-1 text-lg">
                                     Confirm Password
                                 </label>
                             }
-                            name="confirm_password"
+                            name="confirmPassword"
                             rules={[{ required: true, message: 'Please input confirm password!' }]}
                         >
                             <Input.Password placeholder="KK!@#$15856" className="h-12 px-6" />

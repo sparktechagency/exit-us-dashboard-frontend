@@ -57,7 +57,7 @@ const Sidebar = () => {
         {
             key: '/top-communities',
             icon: <RiUserCommunityLine size={24} />,
-            label: <Link to="/top-communities">Top Communities</Link>,
+            label: <Link to="/top-communities">All Meetups</Link>,
         },
 
         {

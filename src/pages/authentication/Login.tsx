@@ -1,12 +1,28 @@
-import { Button, Checkbox, ConfigProvider, Form, FormProps, Input } from 'antd';
-import { FieldNamesType } from 'antd/es/cascader';
+import { Button, Checkbox, ConfigProvider, Form, Input } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
+import { useLoginMutation } from '../../redux/apiSlice/auth/auth';
+import toast from 'react-hot-toast';
 
 const Login = () => {
+    const [login] = useLoginMutation();
     const navigate = useNavigate();
-    const onFinish: FormProps<FieldNamesType>['onFinish'] = (values) => {
-        console.log('Received values of form: ', values);
-        navigate('/');
+
+    const onFinish = async (values: { email: string; password: string }) => {
+        const payload = {
+            email: values.email,
+            password: values.password,
+        };
+
+        try {
+            const response = await login(payload).unwrap();
+            if (response) {
+                toast.success('Login Successful', { id: 'login-toast' });
+                localStorage.setItem('accessToken', response.data.accessToken);
+                navigate('/');
+            }
+        } catch (error) {
+            toast.error('Login failed');
+        }
     };
 
     return (

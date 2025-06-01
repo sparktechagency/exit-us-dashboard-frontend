@@ -1,102 +1,27 @@
 import { Select, Table } from 'antd';
-const data = [
-    {
-        key: '00001',
-        userName: 'Beatrice Pedrali',
-        email: 'abg@gmail.com',
-        phone: '+698744',
-        image: 'https://i.ibb.co.com/HpL1HMKZ/image-2.png',
-
-        status: 'Block',
-    },
-    {
-        key: '00002',
-        userName: 'Beatrice Pedrali',
-        email: 'abg@gmail.com',
-        phone: '+698744',
-        image: 'https://i.ibb.co.com/HpL1HMKZ/image-2.png',
-
-        status: 'Block',
-    },
-    {
-        key: '00003',
-        userName: 'Beatrice Pedrali',
-        email: 'abg@gmail.com',
-        phone: '+698744',
-        image: 'https://i.ibb.co.com/HpL1HMKZ/image-2.png',
-
-        status: 'Block',
-    },
-    {
-        key: '00004',
-        userName: 'Beatrice Pedrali',
-        email: 'abg@gmail.com',
-        phone: '+698744',
-        image: 'https://i.ibb.co.com/HpL1HMKZ/image-2.png',
-
-        status: 'Block',
-    },
-    {
-        key: '00005',
-        userName: 'Beatrice Pedrali',
-        email: 'abg@gmail.com',
-        phone: '+698744',
-        image: 'https://i.ibb.co.com/HpL1HMKZ/image-2.png',
-        status: 'Block',
-    },
-    {
-        key: '00001',
-        userName: 'Beatrice Pedrali',
-        email: 'abg@gmail.com',
-        phone: '+698744',
-        image: 'https://i.ibb.co.com/HpL1HMKZ/image-2.png',
-
-        status: 'Block',
-    },
-    {
-        key: '00002',
-        userName: 'Beatrice Pedrali',
-        email: 'abg@gmail.com',
-        phone: '+698744',
-        image: 'https://i.ibb.co.com/HpL1HMKZ/image-2.png',
-
-        status: 'Block',
-    },
-    {
-        key: '00003',
-        userName: 'Beatrice Pedrali',
-        email: 'abg@gmail.com',
-        phone: '+698744',
-        image: 'https://i.ibb.co.com/HpL1HMKZ/image-2.png',
-
-        status: 'Block',
-    },
-    {
-        key: '00004',
-        userName: 'Beatrice Pedrali',
-        email: 'abg@gmail.com',
-        phone: '+698744',
-        image: 'https://i.ibb.co.com/HpL1HMKZ/image-2.png',
-
-        status: 'Block',
-    },
-    {
-        key: '00005',
-        userName: 'Beatrice Pedrali',
-        email: 'abg@gmail.com',
-        phone: '+698744',
-        image: 'https://i.ibb.co.com/HpL1HMKZ/image-2.png',
-        status: 'Block',
-    },
-];
+import { useGetUsersQuery, useUpdateUserMutation } from '../../../redux/apiSlice/users/users';
+import { imageUrl } from '../../../redux/baseApi/api';
+import toast from 'react-hot-toast';
 
 export default function UserManagement() {
-    // Column definitions
+    const { data, isLoading, isFetching } = useGetUsersQuery(undefined);
+    const [updateUser] = useUpdateUserMutation();
+    console.log(data?.data);
+
+    const handleStatus = async (id: string, status: string) => {
+        try {
+            await updateUser({ id, status });
+            toast.success('Status updated');
+        } catch (error) {
+            toast.error('Failed to update status');
+        }
+    };
+
     const columns = [
         {
             title: <span className="title">User Name</span>,
-            dataIndex: 'userName',
-            key: 'userName',
+            dataIndex: 'name',
+            key: 'name',
         },
         {
             title: <span className="title">Email</span>,
@@ -107,7 +32,13 @@ export default function UserManagement() {
             title: <span className="title">Image</span>,
             dataIndex: 'image',
             key: 'image',
-            render: (image: string) => <img src={image} alt="" className="w-10 h-10 rounded-full" />,
+            render: (image: string) => (
+                <img
+                    src={image.startsWith('http') ? image : `${imageUrl}${image}`}
+                    alt="user"
+                    className="w-10 h-10 rounded-full"
+                />
+            ),
         },
         {
             title: <span className="title">phone</span>,
@@ -120,9 +51,13 @@ export default function UserManagement() {
             title: <span className="title flex justify-center mr-4">Status</span>,
             dataIndex: 'status',
             key: 'status',
-            render: (status: string) => (
+            render: (status: string, record: { _id: string }) => (
                 <div className="flex justify-center items-center">
-                    <Select defaultValue={status} className="w-24">
+                    <Select
+                        onChange={(newStatus) => handleStatus(record?._id, newStatus)}
+                        defaultValue={status}
+                        className="w-24"
+                    >
                         <Select.Option value="Block">Block</Select.Option>
                         <Select.Option value="Unblock">Unblock</Select.Option>
                     </Select>
@@ -130,14 +65,17 @@ export default function UserManagement() {
             ),
         },
     ];
+
+    console.log(data);
     return (
         <div className="">
             <div className="mt-4">
                 <Table
                     columns={columns}
                     pagination={{ pageSize: 7 }}
-                    dataSource={data}
-                    // rowClassName="hover:bg-gray-100"
+                    dataSource={data?.data}
+                    loading={isLoading || isFetching}
+                    rowKey="_id"
                 />
             </div>
         </div>

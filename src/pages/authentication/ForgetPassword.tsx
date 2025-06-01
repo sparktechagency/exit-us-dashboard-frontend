@@ -1,12 +1,28 @@
-import { Button, ConfigProvider, Form, FormProps, Input } from 'antd';
-import { FieldNamesType } from 'antd/es/cascader';
+import { Button, ConfigProvider, Form, Input } from 'antd';
 import { useNavigate } from 'react-router';
+import { useForgetPasswordMutation } from '../../redux/apiSlice/auth/auth';
+import toast from 'react-hot-toast';
 
 const ForgetPassword = () => {
+    const [forgetPassword] = useForgetPasswordMutation();
     const navigate = useNavigate();
-    const onFinish: FormProps<FieldNamesType>['onFinish'] = (values) => {
-        console.log('Received values of form: ', values);
-        navigate('/verify-otp');
+
+    const onFinish = async (values: { email: string }) => {
+        try {
+            const res = await forgetPassword(values);
+            if (res?.data?.success) {
+                toast.success('Check your email');
+
+                if (values?.email) {
+                    localStorage.setItem('email', JSON.stringify(values.email));
+                }
+                navigate('/verify-otp');
+            } else {
+                toast.error(res?.data?.message || 'Email is not verified');
+            }
+        } catch (error: any) {
+            toast.error(error?.data?.message || 'Email is not verified');
+        }
     };
 
     return (

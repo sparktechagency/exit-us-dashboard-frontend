@@ -20,14 +20,14 @@ const settings = api.injectEndpoints({
         // privacy
         getPrivacy: builder.query({
             query: () => ({
-                url: '/privacy-policy',
+                url: '/disclaimer?type=privacy',
                 method: 'GET',
             }),
         }),
 
         UpdatePrivacy: builder.mutation({
             query: (data) => ({
-                url: '/privacy-policy',
+                url: '/disclaimer',
                 method: 'POST',
                 body: data,
             }),
@@ -36,14 +36,14 @@ const settings = api.injectEndpoints({
         // terms condition
         getTermsCondition: builder.query({
             query: () => ({
-                url: '/terms-condition',
+                url: '/disclaimer?type=terms',
                 method: 'GET',
             }),
         }),
 
         UpdateTermsCondition: builder.mutation({
             query: (data) => ({
-                url: '/terms-condition',
+                url: '/disclaimer',
                 method: 'POST',
                 body: data,
             }),

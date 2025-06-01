@@ -1,14 +1,35 @@
 import { Button } from 'antd';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import JoditEditor from 'jodit-react';
+import { useGetPrivacyQuery, useUpdatePrivacyMutation } from '../../redux/apiSlice/settings/settings';
+import Loading from '../../components/shared/Loading';
 
 export default function PrivacyPolicy() {
+    const { data, isLoading } = useGetPrivacyQuery(undefined);
+    const [UpdatePrivacy] = useUpdatePrivacyMutation();
     const editor = useRef(null);
     const [content, setContent] = useState('');
 
-    const handleOnSave = () => {
-        console.log('value');
+    console.log(data?.data?.content);
+
+    useEffect(() => {
+        console.log(data?.data?.content);
+        if (data?.data?.content) {
+            setContent(data?.data?.content);
+        }
+    }, [data]);
+
+    const handleOnSave = async () => {
+        const data = {
+            content: content,
+            type: 'privacy',
+        };
+        await UpdatePrivacy(data);
     };
+
+    if (isLoading) {
+        return <Loading />;
+    }
     return (
         <div>
             <div className="">

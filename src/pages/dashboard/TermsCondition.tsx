@@ -1,14 +1,34 @@
 import { Button } from 'antd';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import JoditEditor from 'jodit-react';
+import { useGetTermsConditionQuery, useUpdateTermsConditionMutation } from '../../redux/apiSlice/settings/settings';
+import Loading from '../../components/shared/Loading';
 
 export default function TermsCondition() {
+    const { data, isLoading } = useGetTermsConditionQuery(undefined);
+    const [UpdateTermsCondition] = useUpdateTermsConditionMutation();
     const editor = useRef(null);
     const [content, setContent] = useState('');
 
-    const handleOnSave = () => {
-        console.log('ok');
+    useEffect(() => {
+        console.log(data?.data?.content);
+        if (data?.data?.content) {
+            setContent(data?.data?.content);
+        }
+    }, [data]);
+
+    const handleOnSave = async () => {
+        const data = {
+            content: content,
+            type: 'privacy',
+        };
+        await UpdateTermsCondition(data);
     };
+
+    if (isLoading) {
+        return <Loading />;
+    }
+
     return (
         <div>
             <div className="">

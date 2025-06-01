@@ -20,21 +20,21 @@ const auth = api.injectEndpoints({
 
         veryfyOtp: builder.mutation({
             query: (data) => ({
-                url: '/auth/verify-otp',
+                url: '/auth/verify-email',
                 method: 'POST',
                 body: data,
             }),
         }),
 
         resetPassword: builder.mutation({
-            query: (data) => {
-                const resetToken = localStorage.getItem('accessToken');
+            query: ({ token, data }) => {
+                console.log(token, 'api');
                 return {
                     url: '/auth/reset-password',
                     method: 'POST',
                     body: data,
                     headers: {
-                        Authorization: `Bearer ${resetToken}`,
+                        Authorization: token,
                     },
                 };
             },
@@ -42,4 +42,4 @@ const auth = api.injectEndpoints({
     }),
 });
 
-export const { useLoginMutation, useForgetPasswordMutation, useVeryfyOtpMutation } = auth;
+export const { useLoginMutation, useForgetPasswordMutation, useVeryfyOtpMutation, useResetPasswordMutation } = auth;
