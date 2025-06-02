@@ -4,15 +4,15 @@ const settings = api.injectEndpoints({
     endpoints: (builder) => ({
         getProfile: builder.query({
             query: () => ({
-                url: '/profile',
+                url: '/user/profile',
                 method: 'GET',
             }),
         }),
 
         UpdateProfile: builder.mutation({
             query: (data) => ({
-                url: '/edit-profile',
-                method: 'POST',
+                url: '/user/profile',
+                method: 'PATCH',
                 body: data,
             }),
         }),
@@ -36,22 +36,6 @@ const settings = api.injectEndpoints({
             }),
             invalidatesTags: ['Disclaimer'],
         }),
-
-        // terms condition
-        // getTermsCondition: builder.query({
-        //     query: () => ({
-        //         url: '/disclaimer?type=terms',
-        //         method: 'GET',
-        //     }),
-        // }),
-
-        // UpdateTermsCondition: builder.mutation({
-        //     query: (data) => ({
-        //         url: '/disclaimer',
-        //         method: 'POST',
-        //         body: data,
-        //     }),
-        // }),
     }),
 });
 

@@ -1,12 +1,30 @@
-import { ReactElement, useState } from 'react';
 import { Form, Input } from 'antd';
-import { MdOutlineArrowBackIosNew, MdOutlineModeEdit } from 'react-icons/md';
+import { MdOutlineModeEdit } from 'react-icons/md';
 import { useNavigate } from 'react-router-dom';
+import { useGetProfileQuery } from '../../../redux/apiSlice/settings/settings';
+import Loading from '../../../components/shared/Loading';
+import { useEffect } from 'react';
+import { imageUrl } from '../../../redux/baseApi/api';
 
 export default function Profile() {
+    const { data, isLoading } = useGetProfileQuery(undefined);
+    const profileData = data?.data;
     const navigate = useNavigate();
 
     const [form] = Form.useForm();
+
+    useEffect(() => {
+        if (profileData) {
+            form.setFieldsValue({
+                fullname: profileData?.name,
+                email: profileData?.email,
+            });
+        }
+    }, [form, profileData]);
+
+    if (isLoading) {
+        return <Loading />;
+    }
 
     return (
         <div className="">
@@ -15,13 +33,17 @@ export default function Profile() {
                     <div className="flex items-center gap-4">
                         <div className="relative">
                             <img
-                                src="https://i.ibb.co/xJdQCTG/download.jpg"
+                                src={
+                                    profileData?.image?.startsWith('http')
+                                        ? profileData?.image
+                                        : `${imageUrl}${profileData?.image}`
+                                }
                                 className="border border-[#C68C4E] rounded-full w-24 h-24"
                             />
                         </div>
 
                         <div>
-                            <h3 className="font-medium font-montserrat text-2xl">Ethan Michael</h3>
+                            <h3 className="font-medium font-montserrat text-2xl">{profileData?.name}</h3>
                         </div>
                     </div>
 
@@ -45,6 +67,7 @@ export default function Profile() {
                                     <Input
                                         className="h-14 border border-[#C68C4E] rounded-xl"
                                         placeholder="enter your email"
+                                        readOnly
                                     />
                                 </Form.Item>
                             </div>
@@ -57,6 +80,7 @@ export default function Profile() {
                                     <Input
                                         className="h-14 border border-[#C68C4E] rounded-xl"
                                         placeholder="enter your gmail"
+                                        readOnly
                                     />
                                 </Form.Item>
                             </div>
