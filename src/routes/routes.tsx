@@ -3,7 +3,6 @@ import App from '../App';
 
 import Login from '../pages/authentication/Login';
 import ErrorPage from '../pages/error/ErrorPage';
-import TermsCondition from '../pages/dashboard/PrivacyPolicy';
 
 import Notification from '../pages/dashboard/Notification';
 import ForgetPassword from '../pages/authentication/ForgetPassword';
@@ -20,6 +19,7 @@ import Donate from '../pages/dashboard/donate/Donate';
 import TopCommunities from '../pages/dashboard/allMeetups/AllMeetups';
 import Events from '../pages/dashboard/events/Events';
 import Profile from '../pages/dashboard/profile/Profile';
+import TermsCondition from '../pages/dashboard/TermsCondition';
 
 const router = createBrowserRouter([
     {

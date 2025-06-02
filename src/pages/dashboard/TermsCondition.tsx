@@ -1,28 +1,33 @@
 import { Button } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import JoditEditor from 'jodit-react';
-import { useGetTermsConditionQuery, useUpdateTermsConditionMutation } from '../../redux/apiSlice/settings/settings';
+// import { useGetTermsConditionQuery, useUpdateTermsConditionMutation } from '../../redux/apiSlice/settings/settings';
 import Loading from '../../components/shared/Loading';
+import { useGetDisclaimerQuery, useUpdateDisclaimerMutation } from '../../redux/apiSlice/settings/settings';
 
 export default function TermsCondition() {
-    const { data, isLoading } = useGetTermsConditionQuery(undefined);
-    const [UpdateTermsCondition] = useUpdateTermsConditionMutation();
+    const { data, isLoading } = useGetDisclaimerQuery({ query: `?type=terms` });
+    const termsData = data?.data;
+
     const editor = useRef(null);
     const [content, setContent] = useState('');
 
     useEffect(() => {
-        console.log(data?.data?.content);
-        if (data?.data?.content) {
-            setContent(data?.data?.content);
+        if (termsData) {
+            setContent(termsData?.content);
         }
-    }, [data]);
+    }, [termsData]);
 
-    const handleOnSave = async () => {
-        const data = {
-            content: content,
-            type: 'privacy',
-        };
-        await UpdateTermsCondition(data);
+    const [UpdateDisclaimer] = useUpdateDisclaimerMutation();
+    const handleUpdate = async () => {
+        try {
+            const res = await UpdateDisclaimer({ payload: { content, type: 'terms' } }).unwrap();
+            if (res.success) {
+                console.log('Updating success');
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     if (isLoading) {
@@ -42,7 +47,7 @@ export default function TermsCondition() {
                 </div>
                 <Button
                     block
-                    onClick={handleOnSave}
+                    onClick={handleUpdate}
                     // className="font-barlow"
                     style={{
                         marginTop: '16px',

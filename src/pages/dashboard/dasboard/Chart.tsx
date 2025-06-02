@@ -15,7 +15,7 @@ export default function Chart({ data }: ChartProps) {
 
     const chart = chartData?.map((item: { month: string; total: number }) => ({
         name: item?.month,
-        earnings: item?.total,
+        user: item?.total,
     }));
 
     return (
@@ -47,7 +47,7 @@ export default function Chart({ data }: ChartProps) {
                     <Tooltip />
                     <Line
                         type="monotone"
-                        dataKey="earnings"
+                        dataKey="user"
                         stroke="#EF4136"
                         strokeWidth={2}
                         dot={{ fill: '#FBB040', stroke: '#FBB040', strokeWidth: 2, r: 4 }}

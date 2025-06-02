@@ -1,35 +1,38 @@
 import { Button } from 'antd';
 import { useEffect, useRef, useState } from 'react';
 import JoditEditor from 'jodit-react';
-import { useGetPrivacyQuery, useUpdatePrivacyMutation } from '../../redux/apiSlice/settings/settings';
 import Loading from '../../components/shared/Loading';
+import { useGetDisclaimerQuery, useUpdateDisclaimerMutation } from '../../redux/apiSlice/settings/settings';
 
 export default function PrivacyPolicy() {
-    const { data, isLoading } = useGetPrivacyQuery(undefined);
-    const [UpdatePrivacy] = useUpdatePrivacyMutation();
     const editor = useRef(null);
     const [content, setContent] = useState('');
 
-    console.log(data?.data?.content);
+    const { data, isLoading } = useGetDisclaimerQuery({ query: `?type=privacy` });
+    const privacyData = data?.data;
 
     useEffect(() => {
-        console.log(data?.data?.content);
-        if (data?.data?.content) {
-            setContent(data?.data?.content);
+        if (privacyData) {
+            setContent(privacyData?.content);
         }
-    }, [data]);
+    }, [privacyData]);
 
-    const handleOnSave = async () => {
-        const data = {
-            content: content,
-            type: 'privacy',
-        };
-        await UpdatePrivacy(data);
+    const [UpdateDisclaimer] = useUpdateDisclaimerMutation();
+    const handleUpdate = async () => {
+        try {
+            const res = await UpdateDisclaimer({ payload: { content, type: 'privacy' } }).unwrap();
+            if (res.success) {
+                console.log('Updating success');
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     if (isLoading) {
         return <Loading />;
     }
+
     return (
         <div>
             <div className="">
@@ -43,7 +46,7 @@ export default function PrivacyPolicy() {
                 </div>
                 <Button
                     block
-                    onClick={handleOnSave}
+                    onClick={handleUpdate}
                     className=""
                     style={{
                         marginTop: '16px',

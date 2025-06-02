@@ -19,7 +19,8 @@ const MainLayout: React.FC = () => {
                     <HeaderDashboard />
                 </div>
 
-                <div className=" h-[calc(100vh-80px)] px-8">
+                {/* <div className=" h-[calc(100vh-80px)] px-8"> */}
+                <div className="overflow-auto h-[calc(100vh-60px)] px-8">
                     <div className="h-full overflow-y-auto rounded-md ">
                         <Outlet />
                     </div>

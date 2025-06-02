@@ -16,6 +16,7 @@ const api = createApi({
     }),
 
     endpoints: () => ({}),
+    tagTypes: ['Disclaimer'],
 });
 
 export const imageUrl = 'http://10.0.70.146:5002';

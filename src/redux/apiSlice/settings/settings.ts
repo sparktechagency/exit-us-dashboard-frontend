@@ -18,44 +18,42 @@ const settings = api.injectEndpoints({
         }),
 
         // privacy
-        getPrivacy: builder.query({
-            query: () => ({
-                url: '/disclaimer?type=privacy',
-                method: 'GET',
-            }),
+        getDisclaimer: builder.query({
+            query: ({ query }) => {
+                return {
+                    url: `/disclaimer${query}`,
+                    method: 'GET',
+                };
+            },
+            providesTags: ['Disclaimer'],
         }),
 
-        UpdatePrivacy: builder.mutation({
-            query: (data) => ({
+        UpdateDisclaimer: builder.mutation({
+            query: ({ payload }) => ({
                 url: '/disclaimer',
                 method: 'POST',
-                body: data,
+                body: payload,
             }),
+            invalidatesTags: ['Disclaimer'],
         }),
 
         // terms condition
-        getTermsCondition: builder.query({
-            query: () => ({
-                url: '/disclaimer?type=terms',
-                method: 'GET',
-            }),
-        }),
+        // getTermsCondition: builder.query({
+        //     query: () => ({
+        //         url: '/disclaimer?type=terms',
+        //         method: 'GET',
+        //     }),
+        // }),
 
-        UpdateTermsCondition: builder.mutation({
-            query: (data) => ({
-                url: '/disclaimer',
-                method: 'POST',
-                body: data,
-            }),
-        }),
+        // UpdateTermsCondition: builder.mutation({
+        //     query: (data) => ({
+        //         url: '/disclaimer',
+        //         method: 'POST',
+        //         body: data,
+        //     }),
+        // }),
     }),
 });
 
-export const {
-    useGetProfileQuery,
-    useUpdateProfileMutation,
-    useGetPrivacyQuery,
-    useUpdatePrivacyMutation,
-    useGetTermsConditionQuery,
-    useUpdateTermsConditionMutation,
-} = settings;
+export const { useGetProfileQuery, useUpdateProfileMutation, useGetDisclaimerQuery, useUpdateDisclaimerMutation } =
+    settings;
