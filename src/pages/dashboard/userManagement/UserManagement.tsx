@@ -4,13 +4,14 @@ import { imageUrl } from '../../../redux/baseApi/api';
 import toast from 'react-hot-toast';
 
 export default function UserManagement() {
-    const { data, isLoading, isFetching } = useGetUsersQuery(undefined);
+    const { data, isLoading, isFetching, refetch } = useGetUsersQuery(undefined);
     const [updateUser] = useUpdateUserMutation();
     console.log(data?.data);
 
     const handleStatus = async (id: string, status: string) => {
         try {
             await updateUser({ id, status });
+            refetch();
             toast.success('Status updated');
         } catch (error) {
             toast.error('Failed to update status');
@@ -55,11 +56,11 @@ export default function UserManagement() {
                 <div className="flex justify-center items-center">
                     <Select
                         onChange={(newStatus) => handleStatus(record?._id, newStatus)}
-                        defaultValue={status}
+                        defaultValue={status == 'delete' ? 'Deactive' : 'Active'}
                         className="w-24"
                     >
-                        <Select.Option value="Block">Block</Select.Option>
-                        <Select.Option value="Unblock">Unblock</Select.Option>
+                        <Select.Option value="Block">Active </Select.Option>
+                        <Select.Option value="Unblock">Deactive</Select.Option>
                     </Select>
                 </div>
             ),

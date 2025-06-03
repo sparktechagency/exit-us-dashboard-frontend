@@ -1,4 +1,4 @@
-import api from '../../baseApi/api';
+import { api } from '../../baseApi/api';
 
 const events = api.injectEndpoints({
     endpoints: (builder) => ({
@@ -7,6 +7,7 @@ const events = api.injectEndpoints({
                 url: '/event?page=1&limit',
                 method: 'GET',
             }),
+            providesTags: ['event'],
         }),
 
         deleteEvents: builder.mutation({
@@ -14,6 +15,7 @@ const events = api.injectEndpoints({
                 url: `/event/${id}`,
                 method: 'DELETE',
             }),
+            invalidatesTags: ['event'],
         }),
     }),
 });

@@ -4,7 +4,7 @@ import { useDeleteEventsMutation, useGetEventsQuery } from '../../../redux/apiSl
 import Swal from 'sweetalert2';
 
 export default function Events() {
-    const { data, isLoading, refetch } = useGetEventsQuery(undefined);
+    const { data, isLoading } = useGetEventsQuery(undefined);
     const [deleteEvents] = useDeleteEventsMutation();
     // const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
@@ -30,7 +30,7 @@ export default function Events() {
         }).then((result) => {
             if (result.isConfirmed) {
                 deleteEvents(id);
-                refetch();
+
                 Swal.fire({
                     title: 'Deleted!',
                     text: 'Your file has been deleted.',

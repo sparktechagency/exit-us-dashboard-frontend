@@ -24,7 +24,8 @@ const Sidebar = () => {
     }, [location.pathname]);
 
     const handleLogout = () => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('email');
         navigate('/login');
     };
 

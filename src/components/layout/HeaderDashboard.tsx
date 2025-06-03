@@ -1,5 +1,8 @@
 import { MdOutlineNotifications } from 'react-icons/md';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useGetProfileQuery } from '../../redux/apiSlice/settings/settings';
+import { imageUrl } from '../../redux/baseApi/api';
+import Loading from '../shared/Loading';
 
 const pathLink = [
     { label: 'Dashboard', path: '/' },
@@ -16,9 +19,15 @@ const pathLink = [
 
 export default function Header() {
     const navigate = useNavigate();
+    const { data, isLoading } = useGetProfileQuery(undefined);
+    const profileData = data?.data;
     const location = useLocation();
     const currentPath = location.pathname;
     const currentPathName = pathLink.find((item) => item.path === currentPath);
+
+    if (isLoading) {
+        return <Loading />;
+    }
     return (
         <div className="flex justify-between py-9 px-5">
             <div className="flex items-center gap-2 px-4">
@@ -39,10 +48,14 @@ export default function Header() {
                 <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/profile')}>
                     <img
                         className="rounded-full w-10 h-10 border-2 border-[#8AC2FF]"
-                        src="https://i.ibb.co/xJdQCTG/download.jpg"
+                        src={
+                            profileData?.image?.startsWith('http')
+                                ? profileData?.image
+                                : `${imageUrl}${profileData?.image}`
+                        }
                         alt="pic"
                     />
-                    <div>Mostain Billah</div>
+                    <div>{profileData?.name}</div>
                 </div>
             </div>
         </div>

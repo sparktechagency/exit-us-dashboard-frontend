@@ -53,7 +53,7 @@ export default function TermsCondition() {
                         marginTop: '16px',
                         padding: '1px',
                         fontSize: '24px',
-                        color: 'white',
+                        color: '#ffbc58',
                         background: '#181c1d',
                         height: '54px',
                         border: '1px solid #ffbc58',

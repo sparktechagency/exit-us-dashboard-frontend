@@ -20,11 +20,16 @@ import TopCommunities from '../pages/dashboard/allMeetups/AllMeetups';
 import Events from '../pages/dashboard/events/Events';
 import Profile from '../pages/dashboard/profile/Profile';
 import TermsCondition from '../pages/dashboard/TermsCondition';
+import PrivateRoutes from './PrivateRoutes';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <App />,
+        element: (
+            <PrivateRoutes>
+                <App />
+            </PrivateRoutes>
+        ),
         errorElement: <ErrorPage />,
         children: [
             { path: '', element: <Dashboard /> },

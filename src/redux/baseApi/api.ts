@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 
-const api = createApi({
+export const api = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
         baseUrl: 'http://10.0.70.146:5002/api/v1',
@@ -16,9 +16,8 @@ const api = createApi({
     }),
 
     endpoints: () => ({}),
-    tagTypes: ['Disclaimer'],
+
+    tagTypes: ['Disclaimer', 'event'],
 });
 
 export const imageUrl = 'http://10.0.70.146:5002';
-
-export default api;
