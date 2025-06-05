@@ -17,7 +17,7 @@ export const api = createApi({
 
     endpoints: () => ({}),
 
-    tagTypes: ['Disclaimer', 'event'],
+    tagTypes: ['Disclaimer', 'event', 'Donate'],
 });
 
 export const imageUrl = 'http://10.0.70.146:5002';
