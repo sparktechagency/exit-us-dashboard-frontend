@@ -1,14 +1,13 @@
 'use client';
 
 import { ConfigProvider, Spin, Table } from 'antd';
-import { RiDeleteBin5Line } from 'react-icons/ri';
 import { useState } from 'react';
 import DeleteModal from '../../../modal/DeleteModal';
-import useData from '../../../hooks/useData';
-import Button from '../../../components/shared/Button';
+import { useGetAllDonatesQuery } from '../../../redux/apiSlice/donate/donateApi';
 
 export default function Donate() {
-    const { data, loading } = useData('/data/totalEaring.json');
+    const { data, isLoading } = useGetAllDonatesQuery(undefined);
+    const donateData = data?.data;
     const [isDeleteModalOpen, setIsDeleteModalOpen] = useState<boolean>(false);
 
     const tableTheme = {
@@ -27,7 +26,7 @@ export default function Donate() {
             {/* Table */}
             <div className="rounded-lg mx-auto overflow-x-auto">
                 {/* Loader */}
-                {loading ? (
+                {isLoading ? (
                     <div className="flex justify-center items-center py-8">
                         <Spin size="large" />
                         <p className="ml-3 text-lg">Loading Orders...</p>
@@ -36,81 +35,49 @@ export default function Donate() {
                     <ConfigProvider theme={tableTheme}>
                         <Table
                             bordered={false}
-                            dataSource={data}
+                            dataSource={donateData || []}
                             pagination={{ pageSize: 7 }}
                             className="cursor-pointer"
                         >
                             {/* Define columns here */}
 
                             <Table.Column
-                                title={<div className="ml-6">BookedId</div>}
-                                dataIndex="bookedId"
-                                key="bookedId"
-                                render={(bookedId) => <p className="ml-7">{bookedId}</p>}
-                            />
-                            <Table.Column title="Booked Date" dataIndex="bookedDate" key="bookedDate" />
-                            <Table.Column
-                                title="User Name"
-                                dataIndex="userName"
-                                key="userName"
-                                render={(userName) => userName || 'N/A'}
+                                title={<div className="ml-8">Sl</div>}
+                                key="sl"
+                                render={(_, __, index) => <div className="w-[122px] ">{index + 1}</div>}
                             />
 
                             <Table.Column
-                                title="Start Date"
-                                dataIndex="startDate"
-                                key="startDate"
-                                render={(startDate) =>
-                                    startDate ? (
-                                        <span className="bg-[#181c1d] border border-stoke rounded-md p-1">
-                                            {startDate}
-                                        </span>
-                                    ) : (
-                                        'No'
-                                    )
-                                }
+                                title={<div className="ml-8">Email</div>}
+                                dataIndex="email"
+                                key="email"
+                                render={(item) => {
+                                    return (
+                                        <div className="">
+                                            <span className="py-1 rounded-xl">{item}</span>
+                                        </div>
+                                    );
+                                }}
                             />
 
                             <Table.Column
-                                title="End Date"
-                                dataIndex="endDate"
-                                key="endDate"
-                                render={(endDate) =>
-                                    endDate ? (
-                                        <span className="bg-[#181c1d] border border-stoke rounded-md p-1">
-                                            {endDate}
-                                        </span>
-                                    ) : (
-                                        'No'
-                                    )
-                                }
-                            />
-
-                            <Table.Column
-                                title={<div className="ml-8">Status</div>}
-                                dataIndex="status"
-                                key="status"
-                                render={(status) => (
+                                title={<div className="ml-8">Amount</div>}
+                                dataIndex="amount"
+                                key="amount"
+                                render={(item) => (
                                     <div className="w-[122px] ">
-                                        <Button className="py-1 rounded-xl">{status}</Button>
+                                        <span className="py-1 rounded-xl">{item}</span>
                                     </div>
                                 )}
                             />
+
                             <Table.Column
-                                title={<div className="mr-10">Action</div>}
-                                dataIndex="action"
-                                key="action"
-                                align="center"
-                                render={() => (
-                                    <div className="w-full lg:w-[80%]">
-                                        <div className="flex lg:flex-row flex-col items-center justify-center gap-2 lg:gap-5 py-2 rounded-md   px-2 lg:px-0">
-                                            <span
-                                                className={`text-nowrap font-semibold  py-1 px-2 rounded-md border border-stoke`}
-                                                onClick={() => setIsDeleteModalOpen(true)}
-                                            >
-                                                <RiDeleteBin5Line size={24} className="text-[#FE3838]" />
-                                            </span>
-                                        </div>
+                                title={<div className="ml-8">Date</div>}
+                                dataIndex="createdAt"
+                                key="createdAt"
+                                render={(item) => (
+                                    <div className="w-[122px] ">
+                                        <span className="py-1 rounded-xl">{new Date(item).toLocaleDateString()}</span>
                                     </div>
                                 )}
                             />

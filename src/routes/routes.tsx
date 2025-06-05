@@ -3,7 +3,6 @@ import App from '../App';
 
 import Login from '../pages/authentication/Login';
 import ErrorPage from '../pages/error/ErrorPage';
-import TermsCondition from '../pages/dashboard/PrivacyPolicy';
 
 import Notification from '../pages/dashboard/Notification';
 import ForgetPassword from '../pages/authentication/ForgetPassword';
@@ -17,25 +16,33 @@ import PrivacyPolicy from '../pages/dashboard/PrivacyPolicy';
 import EditProfile from '../pages/dashboard/profile/EditProfile';
 import ChangePassword from '../pages/dashboard/profile/ChangePassword';
 import Donate from '../pages/dashboard/donate/Donate';
-import TopCommunities from '../pages/dashboard/topCommunities/TopCommunities';
+import TopCommunities from '../pages/dashboard/allMeetups/AllMeetups';
 import Events from '../pages/dashboard/events/Events';
+import Profile from '../pages/dashboard/profile/Profile';
+import TermsCondition from '../pages/dashboard/TermsCondition';
+import PrivateRoutes from './PrivateRoutes';
 
 const router = createBrowserRouter([
     {
         path: '/',
-        element: <App />,
+        element: (
+            <PrivateRoutes>
+                <App />
+            </PrivateRoutes>
+        ),
         errorElement: <ErrorPage />,
         children: [
             { path: '', element: <Dashboard /> },
-            { path: 'users', element: <UserManagement /> },
+            { path: 'user-management', element: <UserManagement /> },
             { path: 'donate', element: <Donate /> },
             { path: 'events', element: <Events /> },
             { path: 'totalEaring', element: <TotalEaring /> },
             { path: 'top-communities', element: <TopCommunities /> },
             { path: 'terms-condition', element: <TermsCondition /> },
-            { path: 'policy', element: <PrivacyPolicy /> },
+            { path: 'privacy-policy', element: <PrivacyPolicy /> },
 
             { path: 'notification', element: <Notification /> },
+            { path: 'profile', element: <Profile /> },
             { path: 'edit-profile', element: <EditProfile /> },
             { path: 'change-password', element: <ChangePassword /> },
         ],

@@ -1,31 +1,42 @@
-import { MdOutlineArrowBackIosNew } from 'react-icons/md';
 import { Button } from 'antd';
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import JoditEditor from 'jodit-react';
-import { useNavigate } from 'react-router-dom';
+// import { useGetTermsConditionQuery, useUpdateTermsConditionMutation } from '../../redux/apiSlice/settings/settings';
+import Loading from '../../components/shared/Loading';
+import { useGetDisclaimerQuery, useUpdateDisclaimerMutation } from '../../redux/apiSlice/settings/settings';
 
 export default function TermsCondition() {
-    const editor = useRef(null);
-    const navigate = useNavigate();
+    const { data, isLoading } = useGetDisclaimerQuery({ query: `?type=terms` });
+    const termsData = data?.data;
 
+    const editor = useRef(null);
     const [content, setContent] = useState('');
 
-    const handleOnSave = (value: string) => {
-        console.log(value);
+    useEffect(() => {
+        if (termsData) {
+            setContent(termsData?.content);
+        }
+    }, [termsData]);
+
+    const [UpdateDisclaimer] = useUpdateDisclaimerMutation();
+    const handleUpdate = async () => {
+        try {
+            const res = await UpdateDisclaimer({ payload: { content, type: 'terms' } }).unwrap();
+            if (res.success) {
+                console.log('Updating success');
+            }
+        } catch (error) {
+            console.error(error);
+        }
     };
+
+    if (isLoading) {
+        return <Loading />;
+    }
+
     return (
         <div>
-            <div className="flex items-center gap-4 font-semibold text-[20px]" onClick={() => navigate(-1)}>
-                <button className="text-xl">
-                    <MdOutlineArrowBackIosNew />
-                </button>
-                <button>Privacy Policy</button>
-            </div>
-
             <div className="">
-                {/* <div className="flex items-center justify-center mt-28">
-          <img src={terms} />
-        </div> */}
                 <div className="mt-5">
                     <JoditEditor
                         ref={editor}
@@ -36,13 +47,13 @@ export default function TermsCondition() {
                 </div>
                 <Button
                     block
-                    onClick={() => handleOnSave(content)}
+                    onClick={handleUpdate}
                     // className="font-barlow"
                     style={{
                         marginTop: '16px',
                         padding: '1px',
                         fontSize: '24px',
-                        color: 'white',
+                        color: '#ffbc58',
                         background: '#181c1d',
                         height: '54px',
                         border: '1px solid #ffbc58',
