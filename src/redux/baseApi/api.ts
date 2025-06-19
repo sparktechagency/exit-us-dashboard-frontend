@@ -3,7 +3,7 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react';
 export const api = createApi({
     reducerPath: 'api',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://10.0.70.146:5002/api/v1',
+        baseUrl: 'http://119.148.56.246:5000/api/v1',
         prepareHeaders: (headers) => {
             const token = localStorage.getItem('accessToken');
 
@@ -20,4 +20,4 @@ export const api = createApi({
     tagTypes: ['Disclaimer', 'event', 'Donate'],
 });
 
-export const imageUrl = 'http://10.0.70.146:5002';
+export const imageUrl = 'http://119.148.56.246:5000';
