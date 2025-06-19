@@ -15,13 +15,16 @@ const Login = () => {
 
         try {
             const response = await login(payload).unwrap();
-            if (response) {
+
+            if (response.success) {
                 toast.success('Login Successful', { id: 'login-toast' });
                 localStorage.setItem('accessToken', response.data.accessToken);
                 navigate('/');
+            } else {
+                toast.error(response.message, { id: 'login-toast' });
             }
-        } catch (error) {
-            toast.error('Login failed');
+        } catch (error: any) {
+            toast.error(error?.data?.message || 'Login failed', { id: 'login-toast' });
         }
     };
 
@@ -105,7 +108,6 @@ const Login = () => {
                                     width: '100%',
                                     fontWeight: 500,
                                 }}
-                                // onClick={() => navigate('/')}
                             >
                                 Sign In
                             </Button>
