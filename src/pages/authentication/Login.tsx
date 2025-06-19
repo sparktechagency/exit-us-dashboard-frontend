@@ -18,7 +18,8 @@ const Login = () => {
 
             if (response.success) {
                 toast.success('Login Successful', { id: 'login-toast' });
-                localStorage.setItem('accessToken', response.data.accessToken);
+                // localStorage.setItem('accessToken', response.data.accessToken);
+                document.cookie = `accessToken=${response.data.accessToken}; path=/; max-age=${7 * 24 * 60 * 60}`;
                 navigate('/');
             } else {
                 toast.error(response.message, { id: 'login-toast' });
