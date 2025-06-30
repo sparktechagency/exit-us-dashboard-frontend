@@ -73,7 +73,7 @@ export default function UserManagement() {
             <div className="mt-4">
                 <Table
                     columns={columns}
-                    pagination={{ pageSize: 7 }}
+                    pagination={{ pageSize: 10 }}
                     dataSource={data?.data}
                     loading={isLoading || isFetching}
                     rowKey="_id"

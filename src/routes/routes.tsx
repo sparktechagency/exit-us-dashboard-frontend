@@ -21,6 +21,7 @@ import Events from '../pages/dashboard/events/Events';
 import Profile from '../pages/dashboard/profile/Profile';
 import TermsCondition from '../pages/dashboard/TermsCondition';
 import PrivateRoutes from './PrivateRoutes';
+// import PrivateRoutes from './PrivateRoutes';
 
 const router = createBrowserRouter([
     {
@@ -32,7 +33,7 @@ const router = createBrowserRouter([
         ),
         errorElement: <ErrorPage />,
         children: [
-            { path: '', element: <Dashboard /> },
+            { path: '/', element: <Dashboard /> },
             { path: 'user-management', element: <UserManagement /> },
             { path: 'donate', element: <Donate /> },
             { path: 'events', element: <Events /> },

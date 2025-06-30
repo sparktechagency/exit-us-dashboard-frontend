@@ -1,5 +1,3 @@
-'use client';
-
 import { ConfigProvider, Spin, Table } from 'antd';
 import { useState } from 'react';
 import DeleteModal from '../../../modal/DeleteModal';
@@ -36,48 +34,50 @@ export default function Donate() {
                         <Table
                             bordered={false}
                             dataSource={donateData || []}
-                            pagination={{ pageSize: 7 }}
+                            pagination={{ pageSize: 10 }}
                             className="cursor-pointer"
                         >
                             {/* Define columns here */}
 
                             <Table.Column
-                                title={<div className="ml-8">Sl</div>}
+                                title={<div className="title ">Sl</div>}
                                 key="sl"
-                                render={(_, __, index) => <div className="w-[122px] ">{index + 1}</div>}
+                                render={(_, __, index) => <div className="w-[122px] text-[16px]">{index + 1}</div>}
                             />
 
                             <Table.Column
-                                title={<div className="ml-8">Email</div>}
+                                title={<div className="title ml-8">Email</div>}
                                 dataIndex="email"
                                 key="email"
                                 render={(item) => {
                                     return (
                                         <div className="">
-                                            <span className="py-1 rounded-xl">{item}</span>
+                                            <span className=" rounded-xl text-[16px] py-3">{item}</span>
                                         </div>
                                     );
                                 }}
                             />
 
                             <Table.Column
-                                title={<div className="ml-8">Amount</div>}
+                                title={<div className="title ml-">Amount</div>}
                                 dataIndex="amount"
                                 key="amount"
                                 render={(item) => (
                                     <div className="w-[122px] ">
-                                        <span className="py-1 rounded-xl">{item}</span>
+                                        <span className="py-1 rounded-xl text-[16px]">{item}</span>
                                     </div>
                                 )}
                             />
 
                             <Table.Column
-                                title={<div className="ml-8">Date</div>}
+                                title={<div className="title ml-">Date</div>}
                                 dataIndex="createdAt"
                                 key="createdAt"
                                 render={(item) => (
                                     <div className="w-[122px] ">
-                                        <span className="py-1 rounded-xl">{new Date(item).toLocaleDateString()}</span>
+                                        <span className="py-1 rounded-xl text-[16px]">
+                                            {new Date(item).toLocaleDateString()}
+                                        </span>
                                     </div>
                                 )}
                             />

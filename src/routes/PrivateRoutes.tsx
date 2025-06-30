@@ -10,13 +10,14 @@ export default function PrivateRoutes({ children }: { children: React.ReactNode 
         return <Loading />;
     }
 
-    if (!profile?.data || isError) {
-        return <Navigate to="/login" state={{ form: location }} />;
+    if (isError || !profile?.data) {
+        return <Navigate to="/login" state={{ from: location }} />;
     }
 
-    if (profile?.data?.role === 'SUPER_ADMIN') {
+    const allowedRoles = ['SUPER_ADMIN', 'ADMIN'];
+    if (allowedRoles.includes(profile.data.role)) {
         return children;
     }
 
-    return <Navigate to="/login" />;
+    return <Navigate to="/login" state={{ from: location }} />;
 }

@@ -2,10 +2,27 @@ import { Button, Checkbox, ConfigProvider, Form, Input } from 'antd';
 import { Link, useNavigate } from 'react-router-dom';
 import { useLoginMutation } from '../../redux/apiSlice/auth/auth';
 import toast from 'react-hot-toast';
+// import { useEffect } from 'react';
 
 const Login = () => {
     const [login] = useLoginMutation();
     const navigate = useNavigate();
+
+    // useEffect(() => {
+    //     if (isSuccess && data) {
+    //         toast.success('Login Successful', { id: 'login-toast' });
+    //         localStorage.setItem('accessToken', data.data.accessToken);
+    //         navigate('/');
+    //     }
+
+    //     if (isError && error) {
+    //         const errorMessage =
+    //             'data' in error && typeof error.data === 'object' && error.data && 'message' in error.data
+    //                 ? (error.data as any).message
+    //                 : (error as any).message || 'Login failed';
+    //         toast.error(errorMessage, { id: 'login-toast' });
+    //     }
+    // }, [isSuccess, isError, data, error, navigate]);
 
     const onFinish = async (values: { email: string; password: string }) => {
         const payload = {
@@ -15,16 +32,17 @@ const Login = () => {
 
         try {
             const response = await login(payload).unwrap();
+            console.log(response);
 
-            if (response.success) {
+            if (response?.success) {
                 toast.success('Login Successful', { id: 'login-toast' });
-                // localStorage.setItem('accessToken', response.data.accessToken);
-                document.cookie = `accessToken=${response.data.accessToken}; path=/; max-age=${7 * 24 * 60 * 60}`;
+                localStorage.setItem('accessToken', response.data.accessToken);
                 navigate('/');
             } else {
-                toast.error(response.message, { id: 'login-toast' });
+                toast.error(response?.message || 'Login failed', { id: 'login-toast' });
             }
         } catch (error: any) {
+            // This handles network or server errors
             toast.error(error?.data?.message || 'Login failed', { id: 'login-toast' });
         }
     };

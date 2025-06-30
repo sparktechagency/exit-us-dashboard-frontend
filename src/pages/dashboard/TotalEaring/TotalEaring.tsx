@@ -1,5 +1,3 @@
-'use client';
-
 import { ConfigProvider, Spin, Table } from 'antd';
 
 import { RiDeleteBin5Line } from 'react-icons/ri';
@@ -39,7 +37,7 @@ export default function UpcommingReservation() {
                         <Table
                             bordered={false}
                             dataSource={data}
-                            pagination={{ pageSize: 7 }}
+                            pagination={{ pageSize: 10 }}
                             className="cursor-pointer"
                         >
                             {/* Define columns here */}

@@ -60,7 +60,7 @@ export default function AllMeetups() {
                         <Table
                             bordered={false}
                             dataSource={data?.data}
-                            pagination={{ pageSize: 7 }}
+                            pagination={{ pageSize: 10 }}
                             className="cursor-pointer"
                         >
                             {/* Define columns here */}
