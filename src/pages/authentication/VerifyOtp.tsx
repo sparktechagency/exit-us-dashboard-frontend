@@ -14,7 +14,7 @@ const VerifyOtp = () => {
             email: adminEmail,
             oneTimeCode: parseInt(values.oneTimeCode),
         };
-        console.log(data);
+
         try {
             const res = await veryfyOtp(data);
             if (res?.data?.success) {

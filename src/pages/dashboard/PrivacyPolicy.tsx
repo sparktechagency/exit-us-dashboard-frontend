@@ -19,14 +19,7 @@ export default function PrivacyPolicy() {
 
     const [UpdateDisclaimer] = useUpdateDisclaimerMutation();
     const handleUpdate = async () => {
-        try {
-            const res = await UpdateDisclaimer({ payload: { content, type: 'privacy' } }).unwrap();
-            if (res.success) {
-                console.log('Updating success');
-            }
-        } catch (error) {
-            console.error(error);
-        }
+        await UpdateDisclaimer({ payload: { content, type: 'privacy' } }).unwrap();
     };
 
     if (isLoading) {

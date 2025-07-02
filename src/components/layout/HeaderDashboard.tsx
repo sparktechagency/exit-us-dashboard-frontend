@@ -1,5 +1,4 @@
-import { MdOutlineNotifications } from 'react-icons/md';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { useGetProfileQuery } from '../../redux/apiSlice/settings/settings';
 import { imageUrl } from '../../redux/baseApi/api';
 import Loading from '../shared/Loading';
@@ -35,16 +34,6 @@ export default function Header() {
             </div>
 
             <div className="flex items-center justify-center  gap-5 px-4">
-                {/* <Link to="/notification">
-                    <div className=" flex items-center justify-center rounded-full text-black relative">
-                        <span className="absolute inset-0  ml-6 -mt-2 -left-2">
-                            <div className="inline-flex items-center px-1.5 py-0.5  text-xs font-semibold leading-4 rounded-full bg-[#EEC10B]  text-black">
-                                6
-                            </div>
-                        </span>
-                        <MdOutlineNotifications className="text-yellow-50" size={28} />
-                    </div>
-                </Link> */}
                 <div className="flex items-center gap-2 cursor-pointer" onClick={() => navigate('/profile')}>
                     <img
                         className="rounded-full w-10 h-10 border-2 border-[#8AC2FF]"

@@ -9,7 +9,6 @@ import { imageUrl } from '../../../redux/baseApi/api';
 export default function Profile() {
     const { data, isLoading } = useGetProfileQuery(undefined);
     const profileData = data?.data;
-    console.log(profileData.image);
     const navigate = useNavigate();
 
     const [form] = Form.useForm();
@@ -22,8 +21,6 @@ export default function Profile() {
             });
         }
     }, [form, profileData]);
-
-    console.log(profileData?.image?.startsWith('http') ? profileData?.image : `${imageUrl}${profileData?.image}`);
 
     if (isLoading) {
         return <Loading />;

@@ -10,7 +10,6 @@ const NewPassword = () => {
     const token = searchParams.get('token');
 
     const onFinish = async (values: { newPassword: string; confirmPassword: string }) => {
-        console.log(values);
         if (values.newPassword !== values.confirmPassword) {
             toast.error('Passwords do not match');
             return;

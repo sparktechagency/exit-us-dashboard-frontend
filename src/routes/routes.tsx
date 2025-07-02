@@ -3,13 +3,9 @@ import App from '../App';
 
 import Login from '../pages/authentication/Login';
 import ErrorPage from '../pages/error/ErrorPage';
-
-import Notification from '../pages/dashboard/Notification';
 import ForgetPassword from '../pages/authentication/ForgetPassword';
 import VerifyOtp from '../pages/authentication/VerifyOtp';
 import NewPassword from '../pages/authentication/NewPassword';
-
-import TotalEaring from '../pages/dashboard/TotalEaring/TotalEaring';
 import Dashboard from '../pages/dashboard/dasboard/Dashboard';
 import UserManagement from '../pages/dashboard/userManagement/UserManagement';
 import PrivacyPolicy from '../pages/dashboard/PrivacyPolicy';
@@ -21,7 +17,6 @@ import Events from '../pages/dashboard/events/Events';
 import Profile from '../pages/dashboard/profile/Profile';
 import TermsCondition from '../pages/dashboard/TermsCondition';
 import PrivateRoutes from './PrivateRoutes';
-// import PrivateRoutes from './PrivateRoutes';
 
 const router = createBrowserRouter([
     {
@@ -37,12 +32,9 @@ const router = createBrowserRouter([
             { path: 'user-management', element: <UserManagement /> },
             { path: 'donate', element: <Donate /> },
             { path: 'events', element: <Events /> },
-            { path: 'totalEaring', element: <TotalEaring /> },
             { path: 'top-communities', element: <TopCommunities /> },
             { path: 'terms-condition', element: <TermsCondition /> },
             { path: 'privacy-policy', element: <PrivacyPolicy /> },
-
-            { path: 'notification', element: <Notification /> },
             { path: 'profile', element: <Profile /> },
             { path: 'edit-profile', element: <EditProfile /> },
             { path: 'change-password', element: <ChangePassword /> },

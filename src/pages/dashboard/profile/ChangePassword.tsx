@@ -6,8 +6,7 @@ export default function ChangePassword() {
 
     const [form] = Form.useForm();
 
-    const onFinish = (values: string) => {
-        console.log(values);
+    const onFinish = () => {
         form.resetFields();
     };
 

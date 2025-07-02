@@ -6,7 +6,6 @@ import toast from 'react-hot-toast';
 export default function UserManagement() {
     const { data, isLoading, isFetching, refetch } = useGetUsersQuery(undefined);
     const [updateUser] = useUpdateUserMutation();
-    console.log(data?.data);
 
     const handleStatus = async (id: string, status: string) => {
         try {
@@ -67,7 +66,6 @@ export default function UserManagement() {
         },
     ];
 
-    console.log(data);
     return (
         <div className="">
             <div className="mt-4">

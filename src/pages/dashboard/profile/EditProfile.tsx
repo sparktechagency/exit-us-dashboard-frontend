@@ -14,7 +14,6 @@ export default function EditProfile() {
 
     const [imageUrl, setImageUrl] = useState<File | null>(null);
     const [preview, setPreview] = useState<string | null>(null);
-    console.log(preview);
 
     const [form] = Form.useForm();
 

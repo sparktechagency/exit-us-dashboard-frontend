@@ -19,15 +19,9 @@ export default function TermsCondition() {
     }, [termsData]);
 
     const [UpdateDisclaimer] = useUpdateDisclaimerMutation();
+
     const handleUpdate = async () => {
-        try {
-            const res = await UpdateDisclaimer({ payload: { content, type: 'terms' } }).unwrap();
-            if (res.success) {
-                console.log('Updating success');
-            }
-        } catch (error) {
-            console.error(error);
-        }
+        await UpdateDisclaimer({ payload: { content, type: 'terms' } }).unwrap();
     };
 
     if (isLoading) {
