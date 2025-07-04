@@ -18,7 +18,9 @@ const Login = () => {
             if (response?.success) {
                 toast.success('Login Successful', { id: 'login-toast' });
                 localStorage.setItem('accessToken', response.data.accessToken);
-                window.location.href = '/';
+                setTimeout(() => {
+                    window.location.href = '/';
+                }, 500);
             } else {
                 toast.error(response?.message || 'Login failed', { id: 'login-toast' });
             }
