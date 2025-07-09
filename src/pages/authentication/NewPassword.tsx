@@ -4,7 +4,7 @@ import { useResetPasswordMutation } from '../../redux/apiSlice/auth/auth';
 import toast from 'react-hot-toast';
 
 const NewPassword = () => {
-    const [resetPassword] = useResetPasswordMutation();
+    const [resetPassword, { isLoading }] = useResetPasswordMutation();
     const navigate = useNavigate();
     const searchParams = new URLSearchParams(window.location.search);
     const token = searchParams.get('token');
@@ -16,9 +16,13 @@ const NewPassword = () => {
         }
 
         try {
-            await resetPassword({ token, data: values }).unwrap();
-            toast.success('reset password successfully');
-            navigate('/login');
+            const res = await resetPassword({ token, data: values }).unwrap();
+            if (res?.message) {
+                toast.success(res?.message || 'reset password successfully');
+                navigate('/login');
+            } else {
+                toast.error(res?.message);
+            }
         } catch (error: unknown) {
             toast.error((error as any)?.data?.message || (error as Error)?.message || 'Failed to reset password');
         }
@@ -73,30 +77,29 @@ const NewPassword = () => {
                         >
                             <Input.Password placeholder="KK!@#$15856" className=" h-12 px-6" />
                         </Form.Item>
-                        <Form.Item
-                            label={
-                                <label htmlFor="confirmPassword" className="block  mb-1 text-lg">
-                                    Confirm Password
-                                </label>
-                            }
-                            name="confirmPassword"
-                            rules={[{ required: true, message: 'Please input confirm password!' }]}
-                        >
-                            <Input.Password placeholder="KK!@#$15856" className="h-12 px-6" />
-                        </Form.Item>
+                        <div>
+                            <span> Confirm Password</span>
+                            <Form.Item
+                                name="confirmPassword"
+                                rules={[{ required: true, message: 'Please input confirm password!' }]}
+                            >
+                                <Input.Password placeholder="KK!@#$15856" className="h-12 px-6" />
+                            </Form.Item>
+                        </div>
 
                         <Form.Item>
                             <Button
                                 shape="round"
                                 className="!bg-[#fbb040] !border-none !hover-none"
                                 htmlType="submit"
+                                disabled={isLoading}
                                 style={{
                                     height: 45,
                                     width: '100%',
                                     fontWeight: 500,
                                 }}
                             >
-                                Update Password
+                                {isLoading ? 'Proccessing...' : 'Update Password'}
                             </Button>
                         </Form.Item>
                     </Form>

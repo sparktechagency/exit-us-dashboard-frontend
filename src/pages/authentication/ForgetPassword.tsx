@@ -4,7 +4,7 @@ import { useForgetPasswordMutation } from '../../redux/apiSlice/auth/auth';
 import toast from 'react-hot-toast';
 
 const ForgetPassword = () => {
-    const [forgetPassword] = useForgetPasswordMutation();
+    const [forgetPassword, { isLoading }] = useForgetPasswordMutation();
     const navigate = useNavigate();
 
     const onFinish = async (values: { email: string }) => {
@@ -78,13 +78,14 @@ const ForgetPassword = () => {
                                 className="!bg-[#fbb040] !border-none !hover-none"
                                 shape="round"
                                 htmlType="submit"
+                                disabled={isLoading}
                                 style={{
                                     height: 45,
                                     width: '100%',
                                     fontWeight: 500,
                                 }}
                             >
-                                Send Code
+                                {isLoading ? 'Processing...' : 'Send Code'}
                             </Button>
                         </Form.Item>
                     </Form>

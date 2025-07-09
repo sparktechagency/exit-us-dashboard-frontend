@@ -22,6 +22,9 @@ function App() {
                         Select: {
                             colorBgContainer: '#FFBC58',
                         },
+                        Button: {
+                            fontFamily: 'Outfit, sans-serif', // Corrected to fontFamily
+                        },
                     },
                 }}
             >

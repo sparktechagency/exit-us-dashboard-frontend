@@ -4,7 +4,7 @@ import { useLoginMutation } from '../../redux/apiSlice/auth/auth';
 import toast from 'react-hot-toast';
 
 const Login = () => {
-    const [login] = useLoginMutation();
+    const [login, { isLoading }] = useLoginMutation();
 
     const onFinish = async (values: { email: string; password: string }) => {
         const payload = {
@@ -105,13 +105,14 @@ const Login = () => {
                                 className="!bg-[#fbb040] !border-none !hover-none"
                                 shape="round"
                                 htmlType="submit"
+                                disabled={isLoading}
                                 style={{
                                     height: 45,
                                     width: '100%',
                                     fontWeight: 500,
                                 }}
                             >
-                                Sign In
+                                {isLoading ? 'processing....' : 'Sign In'}
                             </Button>
                         </Form.Item>
                     </Form>

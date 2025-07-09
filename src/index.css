@@ -3,13 +3,20 @@
 @tailwind utilities;
 
 body {
-    font-family: 'Outfit', sans-serif;
+    font-family: 'Outfit', sans-serif !important;
     background: #181c1d !important;
     color: #ffbc58;
 }
 
 .ant-table-wrapper {
     background: #181c1d !important;
+}
+
+.ant-form-item-label {
+    font-family: 'Outfit', sans-serif;
+}
+.ant-btn {
+    font-family: 'Outfit', sans-serif;
 }
 
 .border-bottom {

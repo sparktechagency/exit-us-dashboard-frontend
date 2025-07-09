@@ -14,7 +14,7 @@ const auth = api.injectEndpoints({
             query: (data) => ({
                 url: '/auth/forget-password',
                 method: 'POST',
-                body: data,
+                body: { email: data },
             }),
         }),
 

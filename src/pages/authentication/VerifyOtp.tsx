@@ -1,13 +1,27 @@
 import { Button, ConfigProvider, Form, Input } from 'antd';
 import { useNavigate } from 'react-router-dom';
-import { useVeryfyOtpMutation } from '../../redux/apiSlice/auth/auth';
+import { useForgetPasswordMutation, useVeryfyOtpMutation } from '../../redux/apiSlice/auth/auth';
 import toast from 'react-hot-toast';
 
 const VerifyOtp = () => {
-    const [veryfyOtp] = useVeryfyOtpMutation();
+    const [forgetPassword] = useForgetPasswordMutation(undefined);
+    const [veryfyOtp, { isLoading }] = useVeryfyOtpMutation();
     const navigate = useNavigate();
     const email = localStorage.getItem('email');
     const adminEmail = email ? JSON.parse(email) : '';
+
+    const handleSendCode = async () => {
+        const res = await forgetPassword(adminEmail).unwrap();
+        try {
+            if (res?.success) {
+                toast.success(res?.message || 'Check your email');
+            } else {
+                toast.error(res?.message || 'failed otp');
+            }
+        } catch (error) {
+            toast.error(res?.data?.message || 'Try again otp failed.');
+        }
+    };
 
     const onFinish = async (values: { oneTimeCode: string }) => {
         const data = {
@@ -16,12 +30,14 @@ const VerifyOtp = () => {
         };
 
         try {
-            const res = await veryfyOtp(data);
-            if (res?.data?.success) {
+            const res = await veryfyOtp(data).unwrap();
+            if (res?.success) {
                 toast.success(res.data.message, {
                     duration: 1000,
                 });
                 navigate(`/new-password?token=${res.data.data}`);
+            } else {
+                toast.error(res?.message || 'OTP Verify Successfully');
             }
         } catch (error: any) {
             const errorMessage = error?.data?.message || error?.error || 'Something went wrong';
@@ -68,30 +84,31 @@ const VerifyOtp = () => {
                                 style={{
                                     width: 340,
                                 }}
-                                className=""
-                                // variant="filled"
                                 length={4}
                             />
                         </Form.Item>
 
                         <Form.Item>
                             <Button
+                                className="!bg-[#fbb040] !border-none !hover-none"
                                 shape="round"
                                 type="primary"
                                 htmlType="submit"
+                                disabled={isLoading}
                                 style={{
                                     height: 45,
                                     width: '100%',
                                     fontWeight: 500,
                                 }}
-                                // onClick={() => navigate('/')}
                             >
-                                Verify OTP Code
+                                {isLoading ? 'Processing...' : ' Verify OTP Code'}
                             </Button>
                         </Form.Item>
                         <div className="text-center text-lg flex items-center justify-center gap-2">
                             <p className="">Didn't receive the code?</p>
-                            <p className="text-primary">Resend code</p>
+                            <p className="text-primary cursor-pointer" onClick={handleSendCode}>
+                                Resend code
+                            </p>
                         </div>
                     </Form>
                 </div>
