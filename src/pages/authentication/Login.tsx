@@ -2,9 +2,11 @@ import { Button, Checkbox, ConfigProvider, Form, Input } from 'antd';
 import { Link } from 'react-router-dom';
 import { useLoginMutation } from '../../redux/apiSlice/auth/auth';
 import toast from 'react-hot-toast';
+import { useState } from 'react';
 
 const Login = () => {
     const [login, { isLoading }] = useLoginMutation();
+    const [rememberMe, setRememberMe] = useState(false);
 
     const onFinish = async (values: { email: string; password: string }) => {
         const payload = {
@@ -18,6 +20,10 @@ const Login = () => {
             if (response?.success) {
                 toast.success('Login Successful', { id: 'login-toast' });
                 localStorage.setItem('accessToken', response.data.accessToken);
+
+                if (rememberMe) {
+                    localStorage.setItem('rememberMe', 'true');
+                }
                 setTimeout(() => {
                     window.location.href = '/';
                 }, 500);
@@ -93,7 +99,13 @@ const Login = () => {
 
                         <div className="flex items-center justify-between mb-4">
                             <Form.Item name="remember" valuePropName="checked" noStyle>
-                                <Checkbox className=" text-lg">Remember me</Checkbox>
+                                <Checkbox
+                                    onChange={(e) => setRememberMe(e.target.value)}
+                                    checked={rememberMe}
+                                    className=" text-lg"
+                                >
+                                    Remember me
+                                </Checkbox>
                             </Form.Item>
                             <Link to="/forget-password" className="text-primary text-md hover:text-primary">
                                 Forget password
