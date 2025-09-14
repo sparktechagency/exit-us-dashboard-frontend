@@ -60,6 +60,11 @@ const Sidebar = () => {
             icon: <RiUserCommunityLine size={24} />,
             label: <Link to="/top-communities">All Meetups</Link>,
         },
+        {
+            key: '/subscriptions',
+            icon: <RiUserCommunityLine size={24} />,
+            label: <Link to="/subscriptions">Subscriptions</Link>,
+        },
 
         {
             key: 'profile',

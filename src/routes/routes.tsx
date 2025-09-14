@@ -17,6 +17,7 @@ import Events from '../pages/dashboard/events/Events';
 import Profile from '../pages/dashboard/profile/Profile';
 import TermsCondition from '../pages/dashboard/TermsCondition';
 import PrivateRoutes from './PrivateRoutes';
+import Subscriptions from '../pages/dashboard/subscriptions/Subscriptions';
 
 const router = createBrowserRouter([
     {
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
             { path: 'donate', element: <Donate /> },
             { path: 'events', element: <Events /> },
             { path: 'top-communities', element: <TopCommunities /> },
+            { path: 'subscriptions', element: <Subscriptions /> },
             { path: 'terms-condition', element: <TermsCondition /> },
             { path: 'privacy-policy', element: <PrivacyPolicy /> },
             { path: 'profile', element: <Profile /> },

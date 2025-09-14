@@ -1,0 +1,35 @@
+import { useState } from 'react';
+
+// import Premium from './Premium';
+import { GoPlus } from 'react-icons/go';
+import SubscribeModal from './SubscribeModal';
+import SubscriptionCard from './SubscriptionCard';
+// import DublicateSubscribeEditModal from '@/modal/DublicateSubscribeEditModal';
+
+export default function Subscriptions() {
+    const [add, setAdd] = useState<boolean | null>(null);
+    return (
+        <>
+            <div className=" flex justify-between items-center text-black cursor-pointer">
+                <h1 className="text-2xl font-semibold text-[#ffbc58]">Subscription Plans</h1>
+                <div
+                    className=" p-3 bg-[#fdead8] flex items-center gap-2 rounded-lg cursor-pointer"
+                    onClick={() => setAdd(true)}
+                >
+                    <p>
+                        <GoPlus />
+                    </p>
+                    <button className="cursor-pointer">Add Subscription</button>
+                </div>
+            </div>
+
+            <div className="mt-10 mb-26">
+                <SubscriptionCard />
+            </div>
+
+            {/* modal show */}
+            {/* {add && <SubscribeEditModal isOpen={add} onClose={() => setAdd(null)} />} */}
+            {add && <SubscribeModal isOpen={add} onClose={() => setAdd(null)} />}
+        </>
+    );
+}
