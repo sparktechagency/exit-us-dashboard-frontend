@@ -17,7 +17,7 @@ export const api = createApi({
 
     endpoints: () => ({}),
 
-    tagTypes: ['Disclaimer', 'event', 'Donate'],
+    tagTypes: ['Disclaimer', 'event', 'Donate', 'package'],
 });
 
 export const imageUrl = 'https://shariful5001.binarybards.online';

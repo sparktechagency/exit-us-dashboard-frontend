@@ -43,31 +43,31 @@ interface ModalProps {
 }
 
 const Modal: React.FC<ModalProps> = ({ isOpen, onClose, children }) => {
-    const modalRef = useRef<HTMLDivElement>(null);
+    // const modalRef = useRef<HTMLDivElement>(null);
 
-    useEffect(() => {
-        const handleOutsideClick = (e: MouseEvent) => {
-            if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
-                onClose?.();
-            }
-        };
+    // useEffect(() => {
+    //     const handleOutsideClick = (e: MouseEvent) => {
+    //         if (modalRef.current && !modalRef.current.contains(e.target as Node)) {
+    //             onClose?.();
+    //         }
+    //     };
 
-        if (isOpen) {
-            document.addEventListener('mousedown', handleOutsideClick);
-        } else {
-            document.removeEventListener('mousedown', handleOutsideClick);
-        }
+    //     if (isOpen) {
+    //         document.addEventListener('mousedown', handleOutsideClick);
+    //     } else {
+    //         document.removeEventListener('mousedown', handleOutsideClick);
+    //     }
 
-        return () => {
-            document.removeEventListener('mousedown', handleOutsideClick);
-        };
-    }, [isOpen, onClose]);
+    //     return () => {
+    //         document.removeEventListener('mousedown', handleOutsideClick);
+    //     };
+    // }, [isOpen, onClose]);
 
     if (!isOpen) return null;
 
     return (
         <div style={styles.overlay}>
-            <div ref={modalRef} style={styles.modal}>
+            <div style={styles.modal}>
                 {onClose && (
                     <button onClick={onClose} style={styles.closeButton} className="text-black h-5 w-5 pr-4">
                         <IoMdClose />

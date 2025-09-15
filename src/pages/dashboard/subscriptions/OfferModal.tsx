@@ -13,8 +13,8 @@ export default function AddOfferModal({ offer, setOffer, isOpen, onClose, onAddO
         e.preventDefault();
         if (offer.trim() == '') return;
         onAddOffer(offer.trim());
-        onClose();
         setOffer('');
+        onClose();
     };
 
     if (!isOpen) return null;

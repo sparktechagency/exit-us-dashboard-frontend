@@ -3,28 +3,48 @@ import { BiMinus, BiPlus } from 'react-icons/bi';
 import { IoCheckmarkOutline, IoClose } from 'react-icons/io5';
 import AddOfferModal from './OfferModal';
 import Modal from '../../../modal/Modal';
+import {
+    useCreateSubscriptionMutation,
+    useEditSubscriptionMutation,
+} from '../../../redux/apiSlice/subcriptions/subscriptions';
+import toast from 'react-hot-toast';
 
 const packageOptions = ['Premium Plan', 'Standard Plan'];
+const types = ['monthly', 'yearly'];
+
+interface SubscribeData {
+    _id: string;
+    name: string;
+    price: number;
+    features: string[];
+    recurring?: string;
+    paymentId?: string;
+    referenceId?: string;
+    // add more fields as needed
+}
 
 interface SubscribeModalProps {
     isOpen: boolean;
     onClose: () => void;
-    data?: number | null;
+    data?: SubscribeData;
 }
 
 export default function SubscribeModal({ data, isOpen, onClose }: SubscribeModalProps) {
+    const [createSubscription] = useCreateSubscriptionMutation();
+    const [editSubscription] = useEditSubscriptionMutation();
+
     const [offer, setOffer] = useState('');
-    console.log(offer);
-    const [packageName, setPackageName] = useState('');
-    const [price, setPrice] = useState('');
+    const [packageName, setPackageName] = useState({
+        title: data?.name || '',
+        type: data?.recurring || '',
+    });
     const [openModal, setOpenModal] = useState(false);
-    const [offers, setOffers] = useState([
-        '120 day permission to use',
-        'Free training tutorial',
-        'Free journal',
-        'Free consultations',
-        '20 Community post',
-    ]);
+    const [offers, setOffers] = useState(Array.isArray(data?.features) ? [...data.features] : []);
+    const [allCategories, setAllCategories] = useState({
+        price: data?.price || '',
+        paymentId: data?.paymentId || '',
+        referenceId: data?.referenceId || '',
+    });
 
     // Update offer text by index
     const updateOffer = (index: number, value: string) => {
@@ -43,9 +63,43 @@ export default function SubscribeModal({ data, isOpen, onClose }: SubscribeModal
     };
 
     // Submit handler (you can customize)
-    const handleSubmit = (e: any) => {
+
+    const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
-        console.log({ packageName, price, offers });
+
+        try {
+            if (data?._id) {
+                const response = await editSubscription({
+                    id: data._id,
+                    data: { name: packageName.title, price: Number(allCategories.price), features: offers },
+                }).unwrap();
+
+                if (response.success) {
+                    toast.success('Subscription updated successfully!');
+                    onClose();
+                } else {
+                    toast.error('Failed to update subscription.');
+                }
+            } else {
+                const response = await createSubscription({
+                    name: packageName.title,
+                    price: Number(allCategories.price),
+                    features: offers,
+                    paymentId: allCategories.paymentId,
+                    referenceId: allCategories.referenceId,
+                    recurring: packageName.type,
+                }).unwrap();
+
+                if (response.success) {
+                    toast.success('Subscription created successfully!');
+                    onClose();
+                } else {
+                    toast.error('Failed to create subscription.');
+                }
+            }
+        } catch (err) {
+            toast.error('An error occurred. Please try again.');
+        }
     };
 
     if (!isOpen) return null;
@@ -72,8 +126,8 @@ export default function SubscribeModal({ data, isOpen, onClose }: SubscribeModal
                             </label>
                             <select
                                 id="packageName"
-                                value={packageName}
-                                onChange={(e) => setPackageName(e.target.value)}
+                                value={packageName.title}
+                                onChange={(e) => setPackageName((prev) => ({ ...prev, title: e.target.value }))}
                                 className="w-full bg-[#212526]  border border-gray-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
                                 required
                             >
@@ -97,8 +151,57 @@ export default function SubscribeModal({ data, isOpen, onClose }: SubscribeModal
                                 id="price"
                                 type="number"
                                 placeholder="Enter price"
-                                value={price}
-                                onChange={(e) => setPrice(e.target.value)}
+                                value={allCategories.price}
+                                onChange={(e) => setAllCategories((prev) => ({ ...prev, price: e.target.value }))}
+                                className="w-full bg-[#212526]  border border-gray-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label className="block mb-1 text-sm font-medium" htmlFor="monthly">
+                                Recurring
+                            </label>
+                            <select
+                                id="monthly"
+                                value={packageName.type}
+                                onChange={(e) => setPackageName((prev) => ({ ...prev, type: e.target.value }))}
+                                className="w-full bg-[#212526]  border border-gray-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                                required
+                            >
+                                <option value="" disabled>
+                                    Select Package Type
+                                </option>
+                                {types.map((option) => (
+                                    <option key={option} value={option}>
+                                        {option}
+                                    </option>
+                                ))}
+                            </select>
+                        </div>
+                        <div>
+                            <label className="block mb-1 text-sm font-medium" htmlFor="paymentId">
+                                payment ID
+                            </label>
+                            <input
+                                id="paymentId"
+                                type="text"
+                                placeholder="Enter paymentId"
+                                value={allCategories.paymentId}
+                                onChange={(e) => setAllCategories((prev) => ({ ...prev, paymentId: e.target.value }))}
+                                className="w-full bg-[#212526]  border border-gray-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
+                                required
+                            />
+                        </div>
+                        <div>
+                            <label className="block mb-1 text-sm font-medium" htmlFor="referenceId">
+                                Reference ID
+                            </label>
+                            <input
+                                id="referenceId"
+                                type="text"
+                                placeholder="Enter referenceId"
+                                value={allCategories.referenceId}
+                                onChange={(e) => setAllCategories((prev) => ({ ...prev, referenceId: e.target.value }))}
                                 className="w-full bg-[#212526]  border border-gray-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
                                 required
                             />
@@ -118,7 +221,7 @@ export default function SubscribeModal({ data, isOpen, onClose }: SubscribeModal
                                 </button>
                             </div>
                             <div className="space-y-2 max-h-48 overflow-y-auto border border-gray-700 rounded-md">
-                                {offers.map((offer, i) => (
+                                {offers?.map((offer, i) => (
                                     <div key={i} className="flex items-center justify-between  rounded-md py-1 px-2">
                                         <div className="flex items-center space-x-2">
                                             <span className="text-green-500">
