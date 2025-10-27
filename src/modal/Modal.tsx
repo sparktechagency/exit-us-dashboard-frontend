@@ -1,4 +1,3 @@
-import React, { useEffect, useRef } from 'react';
 import { IoMdClose } from 'react-icons/io';
 
 const styles: {

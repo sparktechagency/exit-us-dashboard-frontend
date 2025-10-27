@@ -17,7 +17,7 @@ const settings = api.injectEndpoints({
             }),
         }),
 
-        // privacy
+        // privacy and condition
         getDisclaimer: builder.query({
             query: ({ query }) => {
                 return {

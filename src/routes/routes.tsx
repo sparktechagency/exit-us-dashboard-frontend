@@ -18,6 +18,8 @@ import Profile from '../pages/dashboard/profile/Profile';
 import TermsCondition from '../pages/dashboard/TermsCondition';
 import PrivateRoutes from './PrivateRoutes';
 import Subscriptions from '../pages/dashboard/subscriptions/Subscriptions';
+import Policy from '../components/publicRoute/Privacy-Policy';
+import Condition from '../components/publicRoute/TermsCondition';
 
 const router = createBrowserRouter([
     {
@@ -46,6 +48,8 @@ const router = createBrowserRouter([
     { path: '/forget-password', element: <ForgetPassword /> },
     { path: '/verify-otp', element: <VerifyOtp /> },
     { path: '/new-password', element: <NewPassword /> },
+    { path: '/policy', element: <Policy /> },
+    { path: '/condition', element: <Condition /> },
 ]);
 
 export default router;
