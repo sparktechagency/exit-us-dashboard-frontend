@@ -10,9 +10,9 @@ export default function Condition() {
     }
 
     return (
-        <div className="mb-10">
-            <div className="flex items-center justify-center gap-4 font-semibold text-[40px] my-20">
-                <h1>Terms Condition</h1>
+        <div className=" bg-white min-h-screen p-6 text-black">
+            <div className="flex items-center justify-center gap-4 font-semibold text-[40px]">
+                <h1>Terms & Condition</h1>
             </div>
 
             <div className="">
