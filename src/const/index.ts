@@ -1,6 +1,6 @@
 export const faqData = [
     {
-        question: 'What is the recommended age for using your baby products?',
+        question: 'What is the recommended age for using your baby products??',
         answer: 'Our baby products are designed for newborns up to 3 years old. However, each product comes with specific guidelines for the recommended age range.',
     },
     {
