@@ -9,7 +9,6 @@ import {
 } from '../../../redux/apiSlice/subcriptions/subscriptions';
 import toast from 'react-hot-toast';
 
-const packageOptions = ['Premium Plan', 'Standard Plan'];
 const types = ['monthly', 'yearly'];
 
 interface SubscribeData {
