@@ -57,12 +57,14 @@ export default function SubscriptionCard() {
                             <h2 className="text-xl font-bold text-center bg-gradient-to-r from-[#FEFED6] to-[#FCAC43] bg-clip-text text-transparent">
                                 {item?.name}
                             </h2>
-                            <button onClick={() => setEdit(item)}>
-                                <FiEdit size={22} />
-                            </button>
-                            <button onClick={() => handleDelete(item?._id)}>
-                                <RiDeleteBinLine className="text-red-500" size={22} />
-                            </button>
+                            <div className="space-x-4">
+                                <button onClick={() => setEdit(item)}>
+                                    <FiEdit size={22} />
+                                </button>
+                                <button onClick={() => handleDelete(item?._id)}>
+                                    <RiDeleteBinLine className="text-red-500" size={22} />
+                                </button>
+                            </div>
                         </div>
                         <div className="text-center mt-8">
                             <span className="text-2xl font-medium text-[#FEFEFE]">{item?.price} USD</span>
