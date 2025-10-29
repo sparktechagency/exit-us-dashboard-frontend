@@ -124,22 +124,13 @@ export default function SubscribeModal({ data, isOpen, onClose }: SubscribeModal
                             <label className="block mb-1 text-sm font-medium" htmlFor="packageName">
                                 Package Name
                             </label>
-                            <select
+                            <input
                                 id="packageName"
                                 value={packageName.title}
                                 onChange={(e) => setPackageName((prev) => ({ ...prev, title: e.target.value }))}
                                 className="w-full bg-[#212526]  border border-gray-700 rounded-md p-2 text-white focus:outline-none focus:ring-2 focus:ring-green-500"
                                 required
-                            >
-                                <option value="" disabled>
-                                    Select Package Name
-                                </option>
-                                {packageOptions.map((option) => (
-                                    <option key={option} value={option}>
-                                        {option}
-                                    </option>
-                                ))}
-                            </select>
+                            />
                         </div>
 
                         {/* Price Input */}
